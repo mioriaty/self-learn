@@ -1,4 +1,4 @@
-import { Type, CreateActionCallback, ActionTypes } from "types/types";
+import { Type, CreateActionCallback } from "./types";
 
 export declare function createAction<ActionType extends Type>(
   type: ActionType,
