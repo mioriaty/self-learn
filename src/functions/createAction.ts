@@ -1,4 +1,4 @@
-import { Type, CreateActionCallback } from "types/types";
+import { Type, CreateActionCallback, ActionTypes } from "types/types";
 
 export declare function createAction<ActionType extends Type>(
   type: ActionType,
@@ -30,7 +30,3 @@ export declare function createAction<
   type: ActionType;
   payload: TCallbackReturn;
 };
-
-const actionShowModal = createAction("@ShowModal", (show: boolean) => ({
-  show,
-}));
