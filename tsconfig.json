@@ -19,7 +19,7 @@
     "sourceMap": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "./src",
     "plugins": [
@@ -32,7 +32,10 @@
           ]
         }
       }
-    ]
+    ],
+    "paths": {
+      "*": ["./@types/*", "*"]
+    }
   },
   "exclude": [
     "node_modules",
