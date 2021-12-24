@@ -1,4 +1,4 @@
-import { isBrowser } from 'core/constants/isBrowser';
+import { isBrowser } from 'core/utils/isBrowser';
 
 export const checkElementIntersectingViewport = (container: Element) => {
   const rect = container.getBoundingClientRect();

@@ -1,5 +1,5 @@
-import defaultColors from "core/constants/defaultColors";
-import defaultFonts from "core/constants/defaultFonts";
+import defaultColors from 'core/constants/defaultColors';
+import defaultFonts from 'core/constants/defaultFonts';
 
 export type Colors = typeof defaultColors;
 
