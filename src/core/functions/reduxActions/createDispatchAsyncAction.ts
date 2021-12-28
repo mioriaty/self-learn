@@ -1,14 +1,14 @@
 import { Dispatcher } from './dispatcher';
 
 export function createDispatchAsyncAction<
-  TRequestPayload extends object,
-  TSuccessPayload extends object,
-  TFailurePayload extends object,
-  TCancelPayload extends object,
+  TRequestPayload extends Record<string, unknown>,
+  TSuccessPayload extends Record<string, unknown>,
+  TFailurePayload extends Record<string, unknown>,
+  TCancelPayload extends Record<string, unknown>,
   TRequestAction,
   TSuccessAction,
   TFailureAction,
-  TCancelAction
+  TCancelAction,
 >(asyncAction: {
   request: (payload: TRequestPayload) => TRequestAction;
   success: (payload: TSuccessPayload) => TSuccessAction;
@@ -21,14 +21,14 @@ export function createDispatchAsyncAction<
   cancel: (payload?: TCancelPayload) => TCancelAction;
 };
 export function createDispatchAsyncAction<
-  TRequestPayload extends object,
-  TSuccessPayload extends object,
-  TFailurePayload extends object,
+  TRequestPayload extends Record<string, unknown>,
+  TSuccessPayload extends Record<string, unknown>,
+  TFailurePayload extends Record<string, unknown>,
   TCancelPayload extends any,
   TRequestAction,
   TSuccessAction,
   TFailureAction,
-  TCancelAction
+  TCancelAction,
 >(asyncAction: {
   request: (payload: TRequestPayload) => TRequestAction;
   success: (payload: TSuccessPayload) => TSuccessAction;
@@ -41,14 +41,14 @@ export function createDispatchAsyncAction<
   cancel: (payload?: TCancelPayload) => TCancelAction;
 };
 export function createDispatchAsyncAction<
-  TRequestPayload extends object,
-  TSuccessPayload extends object,
+  TRequestPayload extends Record<string, unknown>,
+  TSuccessPayload extends Record<string, unknown>,
   TFailurePayload extends any,
   TCancelPayload extends any,
   TRequestAction,
   TSuccessAction,
   TFailureAction,
-  TCancelAction
+  TCancelAction,
 >(asyncAction: {
   request: (payload: TRequestPayload) => TRequestAction;
   success: (payload: TSuccessPayload) => TSuccessAction;
@@ -61,14 +61,14 @@ export function createDispatchAsyncAction<
   cancel: (payload?: TCancelPayload) => TCancelAction;
 };
 export function createDispatchAsyncAction<
-  TRequestPayload extends object,
+  TRequestPayload extends Record<string, unknown>,
   TSuccessPayload extends any,
   TFailurePayload extends any,
   TCancelPayload extends any,
   TRequestAction,
   TSuccessAction,
   TFailureAction,
-  TCancelAction
+  TCancelAction,
 >(asyncAction: {
   request: (payload: TRequestPayload) => TRequestAction;
   success: (payload: TSuccessPayload) => TSuccessAction;
@@ -88,7 +88,7 @@ export function createDispatchAsyncAction<
   TRequestAction,
   TSuccessAction,
   TFailureAction,
-  TCancelAction
+  TCancelAction,
 >(asyncAction: {
   request: (payload: TRequestPayload) => TRequestAction;
   success: (payload: TSuccessPayload) => TSuccessAction;
@@ -102,12 +102,12 @@ export function createDispatchAsyncAction<
 };
 
 export function createDispatchAsyncAction<
-  TRequestPayload extends object,
-  TSuccessPayload extends object,
-  TFailurePayload extends object,
+  TRequestPayload extends Record<string, unknown>,
+  TSuccessPayload extends Record<string, unknown>,
+  TFailurePayload extends Record<string, unknown>,
   TRequestAction,
   TSuccessAction,
-  TFailureAction
+  TFailureAction,
 >(asyncAction: {
   request: (payload: TRequestPayload) => TRequestAction;
   success: (payload: TSuccessPayload) => TSuccessAction;
@@ -118,12 +118,12 @@ export function createDispatchAsyncAction<
   failure: (payload: TFailurePayload) => TFailureAction;
 };
 export function createDispatchAsyncAction<
-  TRequestPayload extends object,
-  TSuccessPayload extends object,
-  TFailurePayload extends object,
+  TRequestPayload extends Record<string, unknown>,
+  TSuccessPayload extends Record<string, unknown>,
+  TFailurePayload extends Record<string, unknown>,
   TRequestAction,
   TSuccessAction,
-  TFailureAction
+  TFailureAction,
 >(asyncAction: {
   request: (payload: TRequestPayload) => TRequestAction;
   success: (payload: TSuccessPayload) => TSuccessAction;
@@ -134,12 +134,12 @@ export function createDispatchAsyncAction<
   failure: (payload: TFailurePayload) => TFailureAction;
 };
 export function createDispatchAsyncAction<
-  TRequestPayload extends object,
-  TSuccessPayload extends object,
+  TRequestPayload extends Record<string, unknown>,
+  TSuccessPayload extends Record<string, unknown>,
   TFailurePayload extends any,
   TRequestAction,
   TSuccessAction,
-  TFailureAction
+  TFailureAction,
 >(asyncAction: {
   request: (payload: TRequestPayload) => TRequestAction;
   success: (payload: TSuccessPayload) => TSuccessAction;
@@ -150,12 +150,12 @@ export function createDispatchAsyncAction<
   failure: (payload: TFailurePayload) => TFailureAction;
 };
 export function createDispatchAsyncAction<
-  TRequestPayload extends object,
+  TRequestPayload extends Record<string, unknown>,
   TSuccessPayload extends any,
   TFailurePayload extends any,
   TRequestAction,
   TSuccessAction,
-  TFailureAction
+  TFailureAction,
 >(asyncAction: {
   request: (payload: TRequestPayload) => TRequestAction;
   success: (payload: TSuccessPayload) => TSuccessAction;
@@ -171,7 +171,7 @@ export function createDispatchAsyncAction<
   TFailurePayload extends any,
   TRequestAction,
   TSuccessAction,
-  TFailureAction
+  TFailureAction,
 >(asyncAction: {
   request: (payload: TRequestPayload) => TRequestAction;
   success: (payload: TSuccessPayload) => TSuccessAction;
@@ -183,14 +183,14 @@ export function createDispatchAsyncAction<
 };
 
 export function createDispatchAsyncAction<
-  TRequestPayload extends object | any,
-  TSuccessPayload extends object | any,
-  TFailurePayload extends object | any,
-  TCancelPayload extends object | any,
+  TRequestPayload extends Record<string, unknown> | any,
+  TSuccessPayload extends Record<string, unknown> | any,
+  TFailurePayload extends Record<string, unknown> | any,
+  TCancelPayload extends Record<string, unknown> | any,
   TRequestAction,
   TSuccessAction,
   TFailureAction,
-  TCancelAction
+  TCancelAction,
 >(asyncAction: {
   request: (payload: TRequestPayload) => TRequestAction;
   success: (payload: TSuccessPayload) => TSuccessAction;

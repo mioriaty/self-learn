@@ -1,4 +1,3 @@
-import delay from 'utils/functions/delay';
 import { createTodo, getTodos } from './fakeBackend';
 
 export class TodoService {

@@ -1,7 +1,7 @@
 import { DOMElements } from 'core/types/DOMElements';
-import { createElement, FC, forwardRef } from 'react';
+import { AllHTMLAttributes, createElement, FC, forwardRef } from 'react';
 
-export interface ViewProps {
+export interface ViewProps extends AllHTMLAttributes<HTMLElement> {
   tagName?: DOMElements;
   /** Thêm className container ( giống như bootstrap ) */
   container?: boolean;

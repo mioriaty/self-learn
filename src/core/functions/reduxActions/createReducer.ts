@@ -1,6 +1,6 @@
-import { Action, HandleAction } from ".";
-import { getObjectFromHandleActions } from "./getObjectFromHandleAction";
-import { immutableState } from "./immueState";
+import { Action, HandleAction } from '.';
+import { getObjectFromHandleActions } from './getObjectFromHandleAction';
+import { immutableState } from './immueState';
 
 export function reducerFn<TState, TAction extends Action>(initialState: TState, objectActions: HandleAction<TState, TAction>) {
   return (state = initialState, action: Extract<TAction, { type: TAction['type'] }>): TState => {

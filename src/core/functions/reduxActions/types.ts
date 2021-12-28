@@ -27,6 +27,6 @@ export type ActionTypes<TTypeOfActions extends any> = TTypeOfActions extends Act
   ? {
       [K in keyof TTypeOfActions]: ActionTypes<TTypeOfActions[K]>;
     }[keyof TTypeOfActions]
-  : TTypeOfActions extends infer R
+  : TTypeOfActions extends unknown
   ? never
   : never;

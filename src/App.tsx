@@ -1,11 +1,14 @@
-import { View } from 'core/components/View/View';
 import React from 'react';
+import { Provider } from 'react-redux';
+import Routes from 'routes';
+import 'antd/dist/antd.css';
+import { store } from 'store/configureStore';
 
 function App() {
   return (
-    <div className="App">
-      <View> hello</View>
-    </div>
+    <Provider store={store}>
+      <Routes />
+    </Provider>
   );
 }
 

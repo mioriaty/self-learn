@@ -2,7 +2,7 @@ import { Type, CreateActionCallBack } from './types';
 
 export function createAction<TActionType extends Type>(type: TActionType, callback?: CreateActionCallBack): () => { type: TActionType };
 
-export function createAction<TActionType extends Type, TCallbackParams extends object, TCallbackReturn>(
+export function createAction<TActionType extends Type, TCallbackParams extends Record<string, unknown>, TCallbackReturn>(
   type: TActionType,
   callback: (arg: TCallbackParams) => TCallbackReturn,
 ): (arg: TCallbackParams) => { type: TActionType; payload: TCallbackReturn };
