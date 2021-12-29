@@ -1,5 +1,6 @@
+import { Input } from 'antd';
 import { View } from 'core';
-import { FC, InputHTMLAttributes } from 'react';
+import { ChangeEvent, FC, InputHTMLAttributes, LegacyRef } from 'react';
 
 type InputType = 'text' | 'password' | 'email';
 
@@ -16,13 +17,24 @@ export interface TextInputProps {
   value?: string;
   /** Khi bật disabled thì nút mờ đi và không thể thực hiện event */
   disabled?: boolean;
-  innerRef?: React.RefObject<HTMLInputElement>;
+  innerRef?: LegacyRef<Input>;
   /** Sự kiện onChange của input */
   onChange?: InputHTMLAttributes<HTMLInputElement>['onChange'];
   /** Sự kiện onValueChange của input, trả về dữ liệu dạng string(chuỗi) */
   onValueChange?: (text: string) => void;
 }
 
-export const TextInput: FC<TextInputProps> = () => {
-  return <View></View>;
+export const TextInput: FC<TextInputProps> = ({ disabled = false, innerRef, onChange, onValueChange, placeholder, value }) => {
+  const _handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (!disabled) {
+      onValueChange?.(event.target.value);
+      onChange?.(event);
+    }
+  };
+
+  return (
+    <View>
+      <Input value={value} onChange={_handleChange} placeholder={placeholder} ref={innerRef} disabled={disabled} />
+    </View>
+  );
 };

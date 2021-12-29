@@ -8,7 +8,7 @@ export const createTodo = createAsyncAction(['@CreateTodo/request', '@CreateTodo
 >();
 
 export const getAllTodo = createAsyncAction(['@GetAllTodo/request', '@GetAllTodo/success', '@GetAllTodo/failure'])<
-  undefined,
+  { search: string },
   { data: TodoItem[] },
   undefined
 >();

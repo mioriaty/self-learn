@@ -5,23 +5,23 @@ import { v4 } from 'uuid';
 
 const todoState = createState<TodoItem[]>([]);
 
-async function getTodos() {
+async function getTodos(search: string) {
   await delay(500);
-  return todoState.getState();
+  return todoState.getState().filter(item => item.name.includes(search));
 }
 
 async function createTodo(name: string) {
   await delay(500);
 
-  const newTodo: TodoItem = {
+  const newItem: TodoItem = {
     id: v4(),
     name,
     active: false,
   };
 
-  todoState.setState(prevState => [newTodo, ...prevState]);
+  todoState.setState(prevState => [newItem, ...prevState]);
 
-  return newTodo;
+  return newItem;
 }
 
 export { createTodo, getTodos };

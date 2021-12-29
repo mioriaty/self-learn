@@ -1,9 +1,9 @@
 import { createTodo, getTodos } from './fakeBackend';
 
 export class TodoService {
-  async getTodos() {
+  async getTodos(search: string) {
     try {
-      const response = await getTodos();
+      const response = await getTodos(search);
       return response;
     } catch (error) {
       console.log(error);
