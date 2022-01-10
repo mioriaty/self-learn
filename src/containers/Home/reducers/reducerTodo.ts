@@ -1,8 +1,8 @@
 import { ActionTypes, createReducer, handleAction } from 'core';
-import { changeTodoKey, createTodo, getAllTodo } from '../actions/actionTodo';
+import { changeTodoKey, createTodo, editTodoName, getAllTodo } from '../actions/actionTodo';
 import { TodoItem } from '../Todo';
 
-type Actions = ActionTypes<typeof createTodo | typeof getAllTodo | typeof changeTodoKey>;
+type Actions = ActionTypes<typeof createTodo | typeof getAllTodo | typeof changeTodoKey | typeof editTodoName>;
 type SearchKey = string;
 
 export interface TodoState {
@@ -114,6 +114,29 @@ export const reducerTodo = createReducer<TodoState, Actions>(initialState, [
         [searchKey]: {
           ...(state.todos[searchKey] ?? defaultTodoData),
           createStatus: 'failure',
+        },
+      },
+    };
+  }),
+  handleAction('@EditTodoName', ({ state, action }) => {
+    const { id, newName } = action.payload;
+    const { searchKey } = state;
+    return {
+      ...state,
+      todos: {
+        ...state.todos,
+        [searchKey]: {
+          ...(state.todos[searchKey] ?? defaultTodoData),
+          data: (state.todos[searchKey] ?? defaultTodoData).data.map(item => {
+            if (item.id === id) {
+              return {
+                id,
+                name: newName,
+                active: item.active,
+              };
+            }
+            return item;
+          }),
         },
       },
     };

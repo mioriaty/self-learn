@@ -24,4 +24,9 @@ async function createTodo(name: string) {
   return newItem;
 }
 
-export { createTodo, getTodos };
+async function editTodo(id: string) {
+  await delay(500);
+  return id;
+}
+
+export { createTodo, getTodos, editTodo };

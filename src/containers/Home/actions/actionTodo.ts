@@ -13,8 +13,11 @@ export const getAllTodo = createAsyncAction(['@GetAllTodo/request', '@GetAllTodo
   undefined
 >();
 
+export const editTodoName = createAction('@EditTodoName', (id: string, newName: string) => ({ id, newName }));
+
 export const changeTodoKey = createAction('@ChangeTodoKey', (search: string) => ({ search }));
 
 export const useCreateTodo = createDispatchAsyncAction(createTodo);
 export const useGetAllTodo = createDispatchAsyncAction(getAllTodo);
 export const useChangeTodoKey = createDispatchAction(changeTodoKey);
+export const useEditTodoName = createDispatchAction(editTodoName);
