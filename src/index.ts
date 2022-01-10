@@ -1,27 +1,3 @@
-import {
-  ActionTypes,
-  createAction,
-  createReducer,
-  handleAction,
-} from "functions/reduxActions";
-
-const actionShowModal = createAction("@Modal/show", (show: boolean) => ({
-  show,
-}));
-
-type ReducerActions = ActionTypes<typeof actionShowModal>;
-
-interface ReducerState {
-  show: boolean;
-}
-
-const defaultState: ReducerState = {
-  show: false,
-};
-
-const testReducer = createReducer<ReducerState, ReducerActions>(
-  defaultState,
-  [
-
-  ]
-);
+const a = 1;
+console.log("hello", a);
+export { a };
