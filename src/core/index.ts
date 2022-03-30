@@ -10,6 +10,7 @@ export * from './utils/createIntersctionObserver';
 export * from './utils/getDisplayHoc';
 export * from './utils/isBrowser';
 export * from './utils/nightModeBlacklist';
+export * from './utils/createGridStatic';
 
 // components
 export * from './components/View/View';
