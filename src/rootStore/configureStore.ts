@@ -31,7 +31,7 @@ const logger = createLogger({
     return `${window.location.href} - action ${action.type} | ${time} | in ${took.toFixed(2)} ms`;
   },
 });
-if (isDev && window.location.pathname !== '/iframe') {
+if (isDev) {
   middlewares.push(logger);
 }
 
