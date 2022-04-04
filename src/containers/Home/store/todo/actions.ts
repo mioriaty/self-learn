@@ -14,6 +14,11 @@ export interface ReorderTodos {
   };
 }
 
+export interface SetCurrentTodo {
+  type: 'setCurrentTodo';
+  payload: TodoItem | undefined;
+}
+
 export const getAllTodos = createAsyncAction(['@Todo/getAllTodos/request', '@Todo/getAllTodos/success', '@Todo/getAllTodos/failure'])<
   { searchKey: string },
   { todos: TodoItem[] },

@@ -1,12 +1,12 @@
 import { TodoItem } from 'services/Todo';
 import reorder from 'utils/functions/reorder';
 import { ActionTypes, createDispatchAction, createSlice, handleAction } from 'wiloke-react-core/utils';
-import { ChangeSearchKey, createTodo, deleteTodo, getAllTodos, ReorderTodos, updateTodo } from './actions';
+import { ChangeSearchKey, createTodo, deleteTodo, getAllTodos, ReorderTodos, SetCurrentTodo, updateTodo } from './actions';
 
 type TodoId = string;
 type SearchKey = string;
 
-type TodoActions = ChangeSearchKey | ReorderTodos;
+type TodoActions = ChangeSearchKey | ReorderTodos | SetCurrentTodo;
 
 type TodoExtraActions = ActionTypes<typeof getAllTodos | typeof createTodo | typeof deleteTodo | typeof updateTodo>;
 
@@ -22,6 +22,7 @@ interface TodoData {
 interface TodoState {
   searchKey: SearchKey;
   data: Record<SearchKey, undefined | TodoData>;
+  currentTodo: TodoItem | undefined;
 }
 
 export const defaultTodoData: TodoData = {
@@ -37,6 +38,7 @@ const sliceTodo = createSlice<TodoState, TodoActions, TodoExtraActions>({
   initialState: {
     data: {},
     searchKey: '',
+    currentTodo: undefined,
   },
   name: '@Todo',
   reducers: [
@@ -58,6 +60,12 @@ const sliceTodo = createSlice<TodoState, TodoActions, TodoExtraActions>({
             todos: reorder(defaultData.todos, action.payload.srcIndex, action.payload.desIndex),
           },
         },
+      };
+    }),
+    handleAction('setCurrentTodo', ({ state, action }) => {
+      return {
+        ...state,
+        currentTodo: action.payload,
       };
     }),
   ],
@@ -270,10 +278,11 @@ const sliceTodo = createSlice<TodoState, TodoActions, TodoExtraActions>({
   ],
 });
 
-const { changeSearchKey, reorderTodos } = sliceTodo.actions;
+const { changeSearchKey, reorderTodos, setCurrentTodo } = sliceTodo.actions;
 const todoSelector = (state: AppState) => state.homePage.todo;
 
 const useChangeSearchKey = createDispatchAction(changeSearchKey);
 const useReorderTodos = createDispatchAction(reorderTodos);
+const useSetCurrentTodo = createDispatchAction(setCurrentTodo);
 
-export { changeSearchKey, useChangeSearchKey, sliceTodo, todoSelector, useReorderTodos };
+export { changeSearchKey, useChangeSearchKey, sliceTodo, todoSelector, useReorderTodos, useSetCurrentTodo };

@@ -9,16 +9,18 @@ import { useSelector } from 'react-redux';
 import { TodoItem } from 'services/Todo';
 import { Divider, FontAwesome, View } from 'wiloke-react-core';
 import { defaultTodoData, todoSelector, useChangeSearchKey, useGetAllTodos, useReorderTodos } from '.';
+import { useSetCurrentTodo } from './store/todo/slice';
 
 const DebounceInput = withDebounce(TextInput, 'value', 'onValueChange');
 
 export const Home: FC = () => {
-  const { data, searchKey } = useSelector(todoSelector);
+  const { data, searchKey, currentTodo } = useSelector(todoSelector);
   const defaultData = data[searchKey] ?? defaultTodoData;
 
   const getAllTodos = useGetAllTodos();
   const changeSearchKey = useChangeSearchKey();
   const reorderTodos = useReorderTodos();
+  const setCurrentTodo = useSetCurrentTodo();
 
   useEffect(() => {
     getAllTodos.request({ searchKey });
@@ -27,10 +29,18 @@ export const Home: FC = () => {
 
   const renderItem = ({ isDragging, item, dragHandleProps }: RenderItemParam<TodoItem>) => {
     return (
-      <View {...dragHandleProps} css={{ opacity: item.active ? '1' : '0.6' }}>
+      <View
+        {...dragHandleProps}
+        css={{ opacity: item.active ? '1' : '0.6' }}
+        onClick={() => {
+          setCurrentTodo(item);
+        }}
+      >
         <DragItem
-          active={isDragging}
+          dragIconDisabled
+          active={currentTodo?.id === item.id || isDragging}
           label={item.label}
+          description={item.content}
           RightItem={
             <Tooltip portal text={item.active ? 'active' : 'inactive'}>
               <FontAwesome type="far" name={item.active ? 'eye' : 'eye-slash'} css={{ marginRight: '10px' }} />
@@ -78,6 +88,8 @@ export const Home: FC = () => {
             }
           />
         </View>
+
+        <View columns={[12, 8, 8]}>{currentTodo && <View>{currentTodo.content}</View>}</View>
       </View>
     </View>
   );

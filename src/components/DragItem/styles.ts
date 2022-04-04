@@ -5,6 +5,7 @@ export type Variant = 'variant1' | 'variant2';
 export const container = (variant: Variant, active: boolean) => ({ colors }: Theme): Styles => ({
   className: 'DragItem-container',
   overflow: 'hidden',
+  userSelect: 'none',
   ...(variant === 'variant1'
     ? {
         border: `1px solid ${colors.gray3}`,
