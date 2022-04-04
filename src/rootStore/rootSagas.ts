@@ -1,6 +1,7 @@
 import { all, call, delay, spawn } from '@redux-saga/core/effects';
+import { sagasTodo } from 'containers/Home';
 
-const sagas: any[] = [];
+const sagas = [...sagasTodo];
 
 // https://github.com/redux-saga/redux-saga/issues/760#issuecomment-273737022
 const makeRestartable = (saga: any) => {

@@ -1,5 +1,5 @@
-import delay from 'utils/functions/delay';
-import { addTodo, deleteTodoById, deleteTodoByIds, getAllTodos, updateTodoActive } from './fakeApi';
+import { TodoItem } from '.';
+import { addTodo, deleteTodoById, deleteTodoByIds, getAllTodos, updateTodo } from './fakeApi';
 
 export class TodoService {
   public async getTodo() {
@@ -7,13 +7,9 @@ export class TodoService {
     return response.data;
   }
 
-  public async addTodo(content: string) {
-    const newItem = await addTodo(content);
+  public async addTodo(content: string, label: string) {
+    const newItem = await addTodo(content, label);
     return newItem;
-  }
-
-  public async updateTodoStatus(id: string) {
-    await updateTodoActive(id);
   }
 
   public async deleteTodos(ids: string[]) {
@@ -24,7 +20,7 @@ export class TodoService {
     await deleteTodoById(id);
   }
 
-  public async updateTodo(_id: string, _title: string) {
-    await delay(100);
+  public async updateTodo({ id, active, content, label }: AtLeast<TodoItem, 'id'>) {
+    await updateTodo({ id, active, content, label });
   }
 }

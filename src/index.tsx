@@ -1,9 +1,12 @@
 import 'styles/normalize.css';
 import 'styles/index.css';
 import { createRoot } from 'react-dom/client';
+import { getUseDispatchRedux } from 'wiloke-react-core/utils';
+import { useDispatch } from 'react-redux';
 import App from './App';
 
 import reportWebVitals from './reportWebVitals';
+getUseDispatchRedux(useDispatch);
 
 const rootElement = document.getElementById('root') as HTMLElement;
 

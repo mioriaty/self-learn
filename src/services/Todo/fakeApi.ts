@@ -1,7 +1,7 @@
 import delay from 'utils/functions/delay';
 import { v4 } from 'uuid';
 import createState from 'utils/functions/createState';
-import { ClientTodo, ServerTodoModel } from '.';
+import { ClientTodo, ServerTodoModel, TodoItem } from '.';
 
 const initialState: ServerTodoModel = {
   status: 'success',
@@ -10,11 +10,13 @@ const initialState: ServerTodoModel = {
       id: v4(),
       content: 'Todo 1',
       active: false,
+      label: 'task 1',
     },
     {
       id: v4(),
       content: 'Todo 2',
       active: true,
+      label: 'task 2',
     },
   ],
 };
@@ -29,12 +31,13 @@ export async function getAllTodos() {
   return todoState.getState();
 }
 
-export async function addTodo(content: string) {
+export async function addTodo(content: string, label: string) {
   await delay(400);
   const newTodo: ClientTodo = {
     id: v4(),
     content,
     active: false,
+    label,
   };
   todoState.setState(prevState => {
     return {
@@ -45,14 +48,16 @@ export async function addTodo(content: string) {
   return newTodo;
 }
 
-export async function updateTodoActive(id: string) {
+export async function updateTodo({ id, active, content, label }: AtLeast<TodoItem, 'id'>) {
   await delay(400);
   return todoState.setState(prevState => {
     const updatedTodo = todoState.getState().data.map(item => {
       if (item.id === id) {
         return {
           ...item,
-          active: !item.active,
+          active: active ?? item.active,
+          content: content ?? item.content,
+          label: label ?? item.label,
         };
       }
       return item;
