@@ -23,7 +23,7 @@ const initialState: ServerTodoModel = {
 
 const todoState = createState<ServerTodoModel>(initialState, {
   stateName: '__TODO__',
-  useLocalStorage: true,
+  useLocalStorage: false,
 });
 
 export async function getAllTodos() {
