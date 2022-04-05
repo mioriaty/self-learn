@@ -287,4 +287,4 @@ const useChangeSearchKey = createDispatchAction(changeSearchKey);
 const useReorderTodos = createDispatchAction(reorderTodos);
 const useSetCurrentTodo = createDispatchAction(setCurrentTodo);
 
-export { changeSearchKey, useChangeSearchKey, sliceTodo, todoSelector, useReorderTodos, useSetCurrentTodo };
+export { changeSearchKey, useChangeSearchKey, sliceTodo, todoSelector, useReorderTodos, useSetCurrentTodo, setCurrentTodo, reorderTodos };

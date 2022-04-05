@@ -36,8 +36,8 @@ export async function addTodo(content: string, label: string) {
   const newTodo: ClientTodo = {
     id: v4(),
     content,
-    active: false,
     label,
+    active: false,
   };
   todoState.setState(prevState => {
     return {

@@ -7,24 +7,28 @@ import SwitchBeauty from 'components/SwitchBeauty';
 import TextInput from 'components/TextInput';
 import Tooltip from 'components/Tooltip';
 import withDebounce from 'hocs/withDebounce';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { TodoItem } from 'services/Todo';
 import { Divider, FontAwesome, View } from 'wiloke-react-core';
-import { defaultTodoData, todoSelector, useChangeSearchKey, useGetAllTodos, useReorderTodos, useUpdateTodo } from '.';
+import { defaultTodoData, todoSelector, useChangeSearchKey, useCreateTodo, useDeleteTodo, useGetAllTodos, useReorderTodos, useUpdateTodo } from '.';
 import { useSetCurrentTodo } from './store/todo/slice';
 
 const DebounceInput = withDebounce(TextInput, 'value', 'onValueChange');
 
 export const Home: FC = () => {
   const { data, searchKey, currentTodo } = useSelector(todoSelector);
-  const { todos, updateTodo, getTodos } = data[searchKey] ?? defaultTodoData;
+  const { todos, updateTodo, getTodos, createTodo, deleteTodo } = data[searchKey] ?? defaultTodoData;
 
-  const getAllTodos = useGetAllTodos();
   const changeSearchKey = useChangeSearchKey();
   const reorderTodos = useReorderTodos();
   const setCurrentTodo = useSetCurrentTodo();
+  const getAllTodos = useGetAllTodos();
   const updateTodoReq = useUpdateTodo();
+  const createTodoReq = useCreateTodo();
+  const deleteTodoReq = useDeleteTodo();
+
+  const [count, setCount] = useState(1);
 
   useEffect(() => {
     getAllTodos.request({ searchKey });
@@ -33,23 +37,29 @@ export const Home: FC = () => {
 
   const renderItem = ({ isDragging, item, dragHandleProps }: RenderItemParam<TodoItem>) => {
     return (
-      <View
-        {...dragHandleProps}
-        css={{ opacity: item.active ? '1' : '0.6' }}
-        onClick={() => {
-          setCurrentTodo(item);
-        }}
-      >
+      <View key={item.id} {...dragHandleProps} css={{ opacity: !item.active || deleteTodo[item.id] === 'loading' ? '0.6' : '1' }}>
         <DragItem
+          key={item.id}
           dragIconDisabled
           active={currentTodo?.id === item.id || isDragging}
           label={item.label}
           description={item.content}
-          RightItem={
-            <Tooltip portal text={item.active ? 'active' : 'inactive'}>
-              <FontAwesome type="far" name={item.active ? 'eye' : 'eye-slash'} css={{ marginRight: '10px' }} />
-            </Tooltip>
-          }
+          onEdit={() => {
+            setCurrentTodo(item);
+          }}
+          RightItem={[
+            <FontAwesome type="far" name={item.active ? 'eye' : 'eye-slash'} css={{ marginRight: '10px' }} />,
+            <Tooltip portal text={'Delete'}>
+              <FontAwesome
+                onClick={() => {
+                  deleteTodoReq.request({ id: item.id });
+                }}
+                type="far"
+                name="trash"
+                css={{ marginRight: '10px' }}
+              />
+            </Tooltip>,
+          ]}
         />
       </View>
     );
@@ -91,6 +101,22 @@ export const Home: FC = () => {
               />
             }
           />
+
+          <Button
+            radius={4}
+            block
+            loading={createTodo === 'loading'}
+            onClick={() => {
+              createTodoReq.request({
+                todo: { active: false, content: `new todo content ${count}`, label: `new todo label ${count}` },
+                callback: () => {
+                  setCount(count => count + 1);
+                },
+              });
+            }}
+          >
+            Add todo
+          </Button>
         </View>
 
         <View columns={[12, 6, 6]}>

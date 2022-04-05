@@ -26,7 +26,7 @@ export const getAllTodos = createAsyncAction(['@Todo/getAllTodos/request', '@Tod
 >();
 
 export const createTodo = createAsyncAction(['@Todo/createTodo/request', '@Todo/createTodo/success', '@Todo/createTodo/failure'])<
-  Omit<TodoItem, 'id'>,
+  { todo: Omit<TodoItem, 'id'>; callback?: () => void },
   { todo: TodoItem },
   undefined
 >();
