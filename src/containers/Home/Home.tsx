@@ -1,6 +1,8 @@
 import AsyncComponent from 'components/AsyncComponent';
 import DragItem from 'components/DragItem';
+import Field from 'components/Field';
 import Sortable, { RenderItemParam } from 'components/Sortable';
+import SwitchBeauty from 'components/SwitchBeauty';
 import TextInput from 'components/TextInput';
 import Tooltip from 'components/Tooltip';
 import withDebounce from 'hocs/withDebounce';
@@ -89,7 +91,23 @@ export const Home: FC = () => {
           />
         </View>
 
-        <View columns={[12, 8, 8]}>{currentTodo && <View>{currentTodo.content}</View>}</View>
+        <View columns={[12, 6, 6]}>
+          {currentTodo && (
+            <View>
+              <Field label="Label">
+                <DebounceInput block value={currentTodo.label} />
+              </Field>
+
+              <Field label="Content">
+                <DebounceInput block value={currentTodo.content} />
+              </Field>
+
+              <Field label="Active">
+                <SwitchBeauty borderColor="gray3" checked={currentTodo.active} />
+              </Field>
+            </View>
+          )}
+        </View>
       </View>
     </View>
   );
