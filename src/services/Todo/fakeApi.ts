@@ -54,7 +54,7 @@ export async function updateTodo({ id, active, content, label }: AtLeast<TodoIte
     const updatedTodo = todoState.getState().data.map(item => {
       if (item.id === id) {
         return {
-          ...item,
+          id,
           active: active ?? item.active,
           content: content ?? item.content,
           label: label ?? item.label,

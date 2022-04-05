@@ -248,8 +248,10 @@ const sliceTodo = createSlice<TodoState, TodoActions, TodoExtraActions>({
             todos: defaultData.todos.map(item => {
               if (item.id === action.payload.id) {
                 return {
-                  ...item,
-                  ...action.payload,
+                  id: action.payload.id,
+                  active: action.payload.active ?? item.active,
+                  content: action.payload.content ?? item.content,
+                  label: action.payload.label ?? item.label,
                 };
               }
               return item;

@@ -1,4 +1,5 @@
 import AsyncComponent from 'components/AsyncComponent';
+import Button from 'components/Button';
 import DragItem from 'components/DragItem';
 import Field from 'components/Field';
 import Sortable, { RenderItemParam } from 'components/Sortable';
@@ -10,19 +11,20 @@ import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { TodoItem } from 'services/Todo';
 import { Divider, FontAwesome, View } from 'wiloke-react-core';
-import { defaultTodoData, todoSelector, useChangeSearchKey, useGetAllTodos, useReorderTodos } from '.';
+import { defaultTodoData, todoSelector, useChangeSearchKey, useGetAllTodos, useReorderTodos, useUpdateTodo } from '.';
 import { useSetCurrentTodo } from './store/todo/slice';
 
 const DebounceInput = withDebounce(TextInput, 'value', 'onValueChange');
 
 export const Home: FC = () => {
   const { data, searchKey, currentTodo } = useSelector(todoSelector);
-  const defaultData = data[searchKey] ?? defaultTodoData;
+  const { todos, updateTodo, getTodos } = data[searchKey] ?? defaultTodoData;
 
   const getAllTodos = useGetAllTodos();
   const changeSearchKey = useChangeSearchKey();
   const reorderTodos = useReorderTodos();
   const setCurrentTodo = useSetCurrentTodo();
+  const updateTodoReq = useUpdateTodo();
 
   useEffect(() => {
     getAllTodos.request({ searchKey });
@@ -69,12 +71,12 @@ export const Home: FC = () => {
           />
           <Divider size={10} css={{ marginBottom: '4px' }} />
           <AsyncComponent
-            status={defaultData.getTodos}
+            status={getTodos}
             Success={
               <Sortable
                 keyExtractor={item => item.id}
                 itemCss={{ marginBottom: '5px' }}
-                data={defaultData.todos}
+                data={todos}
                 onDragEnd={result => {
                   const srcIndex = result.source.index;
                   const desIndex = result.destination?.index;
@@ -95,16 +97,48 @@ export const Home: FC = () => {
           {currentTodo && (
             <View>
               <Field label="Label">
-                <DebounceInput block value={currentTodo.label} />
+                <DebounceInput
+                  block
+                  css={{ opacity: updateTodo[currentTodo.id] === 'loading' ? 0.6 : 1 }}
+                  value={currentTodo.label}
+                  onValueChange={val => {
+                    setCurrentTodo({ ...currentTodo, label: val });
+                  }}
+                />
               </Field>
 
               <Field label="Content">
-                <DebounceInput block value={currentTodo.content} />
+                <DebounceInput
+                  block
+                  css={{ opacity: updateTodo[currentTodo.id] === 'loading' ? 0.6 : 1 }}
+                  value={currentTodo.content}
+                  onValueChange={val => {
+                    setCurrentTodo({ ...currentTodo, content: val });
+                  }}
+                />
               </Field>
 
               <Field label="Active">
-                <SwitchBeauty borderColor="gray3" checked={currentTodo.active} />
+                <SwitchBeauty
+                  loading={updateTodo[currentTodo.id] === 'loading'}
+                  borderColor="gray3"
+                  checked={currentTodo.active}
+                  onValueChange={val => {
+                    setCurrentTodo({ ...currentTodo, active: val });
+                  }}
+                />
               </Field>
+
+              <Button
+                radius={6}
+                size="small"
+                loading={updateTodo[currentTodo.id] === 'loading'}
+                onClick={() => {
+                  updateTodoReq.request({ ...currentTodo });
+                }}
+              >
+                Update
+              </Button>
             </View>
           )}
         </View>

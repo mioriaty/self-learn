@@ -42,7 +42,7 @@ const TextInput: FC<TextInputProps> & {
   borderWidth = 1,
   color = 'gray8',
   backgroundColor = 'light',
-  radius = 6,
+  radius = 4,
   innerRef,
   onChange,
   onValueChange,

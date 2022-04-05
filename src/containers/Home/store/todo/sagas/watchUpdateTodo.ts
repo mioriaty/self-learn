@@ -4,10 +4,10 @@ import { getActionType } from 'wiloke-react-core/utils';
 import { updateTodo } from '../actions';
 
 function* handleUpdate({ payload }: ReturnType<typeof updateTodo.request>) {
-  const { id, active, content } = payload;
+  const { id, active, content, label } = payload;
   try {
-    yield call(todoService.updateTodo, { id, active, content });
-    yield put(updateTodo.success({ id, active, content }));
+    yield call(todoService.updateTodo, { id, active, content, label });
+    yield put(updateTodo.success({ id, active, content, label }));
   } catch (error) {
     yield put(updateTodo.failure({ id }));
   }
