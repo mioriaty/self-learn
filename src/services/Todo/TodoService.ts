@@ -2,8 +2,8 @@ import { TodoItem } from '.';
 import { addTodo, deleteTodoById, deleteTodoByIds, getAllTodos, updateTodo } from './fakeApi';
 
 export class TodoService {
-  public async getTodo() {
-    const response = await getAllTodos();
+  public async getTodo(s?: string) {
+    const response = await getAllTodos(s);
     return response.data;
   }
 

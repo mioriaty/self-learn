@@ -3,9 +3,9 @@ import { todoService } from 'services/Todo';
 import { getActionType } from 'wiloke-react-core/utils';
 import { getAllTodos } from '../actions';
 
-function* handleGetAll(_: ReturnType<typeof getAllTodos.request>) {
+function* handleGetAll({ payload: { searchKey } }: ReturnType<typeof getAllTodos.request>) {
   try {
-    const response: Awaited<ReturnType<typeof todoService.getTodo>> = yield call(todoService.getTodo);
+    const response: Awaited<ReturnType<typeof todoService.getTodo>> = yield call(todoService.getTodo, searchKey);
     yield put(getAllTodos.success({ todos: response }));
   } catch (error) {
     yield put(getAllTodos.failure(undefined));

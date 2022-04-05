@@ -26,9 +26,13 @@ const todoState = createState<ServerTodoModel>(initialState, {
   useLocalStorage: false,
 });
 
-export async function getAllTodos() {
+export async function getAllTodos(s?: string) {
   await delay(400);
-  return todoState.getState();
+  const response: ServerTodoModel = {
+    data: todoState.getState().data.filter(item => item.label.includes(s ?? '')),
+    status: todoState.getState().status,
+  };
+  return response;
 }
 
 export async function addTodo(content: string, label: string) {
