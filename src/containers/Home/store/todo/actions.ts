@@ -6,14 +6,6 @@ export interface ChangeSearchKey {
   payload: string;
 }
 
-export interface ReorderTodos {
-  type: 'reorderTodos';
-  payload: {
-    srcIndex: number;
-    desIndex: number;
-  };
-}
-
 export interface SetCurrentTodo {
   type: 'setCurrentTodo';
   payload: TodoItem | undefined;
@@ -43,7 +35,14 @@ export const updateTodo = createAsyncAction(['@Todo/updateTodo/request', '@Todo/
   { id: string }
 >();
 
+export const sortTodos = createAsyncAction(['@Todo/sortTodos/request', '@Todo/sortTodos/success', '@Todo/sortTodos/failure'])<
+  { srcIndex: number; desIndex: number },
+  { srcIndex: number; desIndex: number },
+  undefined
+>();
+
 export const useGetAllTodos = createDispatchAsyncAction(getAllTodos);
 export const useCreateTodo = createDispatchAsyncAction(createTodo);
 export const useDeleteTodo = createDispatchAsyncAction(deleteTodo);
 export const useUpdateTodo = createDispatchAsyncAction(updateTodo);
+export const useSortTodos = createDispatchAsyncAction(sortTodos);

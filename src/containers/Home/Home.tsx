@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 import { TodoItem } from 'services/Todo';
 import { Divider, FontAwesome, View } from 'wiloke-react-core';
 import { defaultTodoData, todoSelector, useChangeSearchKey, useCreateTodo, useDeleteTodo, useGetAllTodos, useReorderTodos, useUpdateTodo } from '.';
+import { useSortTodos } from './store/todo/actions';
 import { useSetCurrentTodo } from './store/todo/slice';
 
 const DebounceInput = withDebounce(TextInput, 'value', 'onValueChange');
@@ -21,7 +22,7 @@ export const Home: FC = () => {
   const { todos, updateTodo, getTodos, createTodo, deleteTodo } = data[searchKey] ?? defaultTodoData;
 
   const changeSearchKey = useChangeSearchKey();
-  const reorderTodos = useReorderTodos();
+  const reorderTodos = useSortTodos();
   const setCurrentTodo = useSetCurrentTodo();
   const getAllTodos = useGetAllTodos();
   const updateTodoReq = useUpdateTodo();
@@ -91,7 +92,7 @@ export const Home: FC = () => {
                   const srcIndex = result.source.index;
                   const desIndex = result.destination?.index;
                   if (desIndex !== undefined) {
-                    reorderTodos({
+                    reorderTodos.request({
                       srcIndex,
                       desIndex,
                     });

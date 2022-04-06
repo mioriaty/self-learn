@@ -16,5 +16,8 @@
   },
   "scss.scannerExclude": [
     "**/.git"
+  ],
+  "cSpell.words": [
+    "todos"
   ]
 }

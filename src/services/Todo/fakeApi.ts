@@ -1,6 +1,7 @@
 import delay from 'utils/functions/delay';
 import { v4 } from 'uuid';
 import createState from 'utils/functions/createState';
+import reorder from 'utils/functions/reorder';
 import { ClientTodo, ServerTodoModel, TodoItem } from '.';
 
 const initialState: ServerTodoModel = {
@@ -89,6 +90,16 @@ export async function deleteTodoById(id: string) {
     return {
       ...prevState,
       data: prevState.data.filter(item => item.id !== id),
+    };
+  });
+}
+
+export async function sortTodosByIndex(srcIndex: number, desIndex: number) {
+  await delay(0);
+  return todoState.setState(prevState => {
+    return {
+      ...prevState,
+      data: reorder(prevState.data, srcIndex, desIndex),
     };
   });
 }

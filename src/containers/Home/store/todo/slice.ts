@@ -1,14 +1,14 @@
 import { TodoItem } from 'services/Todo';
 import reorder from 'utils/functions/reorder';
 import { ActionTypes, createDispatchAction, createSlice, handleAction } from 'wiloke-react-core/utils';
-import { ChangeSearchKey, createTodo, deleteTodo, getAllTodos, ReorderTodos, SetCurrentTodo, updateTodo } from './actions';
+import { ChangeSearchKey, createTodo, deleteTodo, getAllTodos, SetCurrentTodo, sortTodos, updateTodo } from './actions';
 
 type TodoId = string;
 type SearchKey = string;
 
-type TodoActions = ChangeSearchKey | ReorderTodos | SetCurrentTodo;
+type TodoActions = ChangeSearchKey | SetCurrentTodo;
 
-type TodoExtraActions = ActionTypes<typeof getAllTodos | typeof createTodo | typeof deleteTodo | typeof updateTodo>;
+type TodoExtraActions = ActionTypes<typeof getAllTodos | typeof createTodo | typeof deleteTodo | typeof updateTodo | typeof sortTodos>;
 
 interface TodoData {
   todos: TodoItem[];
@@ -46,20 +46,6 @@ const sliceTodo = createSlice<TodoState, TodoActions, TodoExtraActions>({
       return {
         ...state,
         searchKey: action.payload,
-      };
-    }),
-    handleAction('reorderTodos', ({ state, action }) => {
-      const { data, searchKey } = state;
-      const defaultData = data[searchKey] ?? defaultTodoData;
-      return {
-        ...state,
-        data: {
-          ...data,
-          [searchKey]: {
-            ...defaultData,
-            todos: reorder(defaultData.todos, action.payload.srcIndex, action.payload.desIndex),
-          },
-        },
       };
     }),
     handleAction('setCurrentTodo', ({ state, action }) => {
@@ -277,14 +263,29 @@ const sliceTodo = createSlice<TodoState, TodoActions, TodoExtraActions>({
         },
       };
     }),
+    handleAction('@Todo/sortTodos/request', ({ state }) => ({ ...state })),
+    handleAction('@Todo/sortTodos/success', ({ state, action }) => {
+      const { data, searchKey } = state;
+      const defaultData = data[searchKey] ?? defaultTodoData;
+      return {
+        ...state,
+        data: {
+          ...data,
+          [searchKey]: {
+            ...defaultData,
+            todos: reorder(defaultData.todos, action.payload.srcIndex, action.payload.desIndex),
+          },
+        },
+      };
+    }),
+    handleAction('@Todo/sortTodos/failure', ({ state }) => ({ ...state })),
   ],
 });
 
-const { changeSearchKey, reorderTodos, setCurrentTodo } = sliceTodo.actions;
+const { changeSearchKey, setCurrentTodo } = sliceTodo.actions;
 const todoSelector = (state: AppState) => state.homePage.todo;
 
 const useChangeSearchKey = createDispatchAction(changeSearchKey);
-const useReorderTodos = createDispatchAction(reorderTodos);
 const useSetCurrentTodo = createDispatchAction(setCurrentTodo);
 
-export { changeSearchKey, useChangeSearchKey, sliceTodo, todoSelector, useReorderTodos, useSetCurrentTodo, setCurrentTodo, reorderTodos };
+export { changeSearchKey, useChangeSearchKey, sliceTodo, todoSelector, useSetCurrentTodo };

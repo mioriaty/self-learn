@@ -1,5 +1,5 @@
 import { TodoItem } from '.';
-import { addTodo, deleteTodoById, deleteTodoByIds, getAllTodos, updateTodo } from './fakeApi';
+import { addTodo, deleteTodoById, deleteTodoByIds, getAllTodos, updateTodo, sortTodosByIndex } from './fakeApi';
 
 export class TodoService {
   public async getTodo(s?: string) {
@@ -22,5 +22,9 @@ export class TodoService {
 
   public async updateTodo({ id, active, content, label }: AtLeast<TodoItem, 'id'>) {
     await updateTodo({ id, active, content, label });
+  }
+
+  public async sortTodos(srcIndex: number, desIndex: number) {
+    await sortTodosByIndex(srcIndex, desIndex);
   }
 }
