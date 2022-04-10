@@ -17,6 +17,7 @@ interface TodoData {
   createTodo: Status;
   deleteTodo: Record<TodoId, Status>;
   updateTodo: Record<TodoId, Status>;
+  sortTodos: Status;
 }
 
 interface TodoState {
@@ -31,6 +32,7 @@ export const defaultTodoData: TodoData = {
   createTodo: 'idle',
   getTodos: 'idle',
   loadMoreTodos: 'idle',
+  sortTodos: 'idle',
   todos: [],
 };
 
@@ -263,7 +265,20 @@ const sliceTodo = createSlice<TodoState, TodoActions, TodoExtraActions>({
         },
       };
     }),
-    handleAction('@Todo/sortTodos/request', ({ state }) => ({ ...state })),
+    handleAction('@Todo/sortTodos/request', ({ state }) => {
+      const { data, searchKey } = state;
+      const defaultData = data[searchKey] ?? defaultTodoData;
+      return {
+        ...state,
+        data: {
+          ...data,
+          [searchKey]: {
+            ...defaultData,
+            sortTodos: 'loading',
+          },
+        },
+      };
+    }),
     handleAction('@Todo/sortTodos/success', ({ state, action }) => {
       const { data, searchKey } = state;
       const defaultData = data[searchKey] ?? defaultTodoData;
@@ -274,11 +289,25 @@ const sliceTodo = createSlice<TodoState, TodoActions, TodoExtraActions>({
           [searchKey]: {
             ...defaultData,
             todos: reorder(defaultData.todos, action.payload.srcIndex, action.payload.desIndex),
+            sortTodos: 'success',
           },
         },
       };
     }),
-    handleAction('@Todo/sortTodos/failure', ({ state }) => ({ ...state })),
+    handleAction('@Todo/sortTodos/failure', ({ state }) => {
+      const { data, searchKey } = state;
+      const defaultData = data[searchKey] ?? defaultTodoData;
+      return {
+        ...state,
+        data: {
+          ...data,
+          [searchKey]: {
+            ...defaultData,
+            sortTodos: 'failure',
+          },
+        },
+      };
+    }),
   ],
 });
 
@@ -288,4 +317,4 @@ const todoSelector = (state: AppState) => state.homePage.todo;
 const useChangeSearchKey = createDispatchAction(changeSearchKey);
 const useSetCurrentTodo = createDispatchAction(setCurrentTodo);
 
-export { changeSearchKey, useChangeSearchKey, sliceTodo, todoSelector, useSetCurrentTodo };
+export { changeSearchKey, useChangeSearchKey, sliceTodo, todoSelector, useSetCurrentTodo, setCurrentTodo };
