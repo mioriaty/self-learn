@@ -1,5 +1,5 @@
 import { computeGuess, getRandomWord, LetterState } from 'utils/wordHelper';
-import { createSlice, handleAction } from 'wiloke-react-core/utils';
+import { createDispatchAction, createSlice, handleAction } from 'wiloke-react-core/utils';
 import { AddGuessLetter, ResetNewGame } from './actions';
 
 export const GUESS_LENGTH = 6;
@@ -11,11 +11,17 @@ interface GuessRow {
 
 type WordleActions = AddGuessLetter | ResetNewGame;
 
+export type GameState = 'playing' | 'won' | 'lost';
+
+export interface KeyboardLetterState {
+  [letter: string]: LetterState;
+}
+
 interface WordleState {
   answer: string;
   rows: GuessRow[];
-  gameState: 'playing' | 'won' | 'lost';
-  keyboardLetterState: { [letter: string]: LetterState };
+  gameState: GameState;
+  keyboardLetterState: KeyboardLetterState;
 }
 
 export const wordleSlice = createSlice<WordleState, WordleActions>({
@@ -60,5 +66,20 @@ export const wordleSlice = createSlice<WordleState, WordleActions>({
         gameState: didWin ? 'won' : _rows.length === GUESS_LENGTH ? 'lost' : 'playing',
       };
     }),
+    handleAction('resetNewGame', ({ state }) => {
+      return {
+        ...state,
+        rows: [],
+        keyboardLetterState: {},
+        gameState: 'playing',
+        answer: getRandomWord(),
+      };
+    }),
   ],
 });
+
+export const { addGuessLetter, resetNewGame } = wordleSlice.actions;
+
+export const useAddGuessLetter = createDispatchAction(addGuessLetter);
+export const useResetNewGame = createDispatchAction(resetNewGame);
+export const wordleSelector = (state: AppState) => state.games.wordle;
