@@ -46,9 +46,8 @@ export const Todo: FC = () => {
 
   const renderItem = ({ isDragging, item, dragHandleProps }: RenderItemParam<TodoItem>) => {
     return (
-      <View key={item.id} {...dragHandleProps} css={{ opacity: !item.active || deleteTodo[item.id] === 'loading' ? '0.6' : '1' }}>
+      <View {...dragHandleProps} key={item.id} css={{ opacity: !item.active || deleteTodo[item.id] === 'loading' ? '0.6' : '1' }} className="lmao">
         <DragItem
-          key={item.id}
           dragIconDisabled
           active={currentTodo?.id === item.id || isDragging}
           label={item.label}
@@ -57,9 +56,10 @@ export const Todo: FC = () => {
             setCurrentTodo(item);
           }}
           RightItem={[
-            <FontAwesome type="far" name={item.active ? 'eye' : 'eye-slash'} css={{ marginRight: '10px' }} />,
-            <Tooltip portal text={'Delete'}>
+            <FontAwesome key={1} type="far" name={item.active ? 'eye' : 'eye-slash'} css={{ marginRight: '10px' }} />,
+            <Tooltip key={2} portal text={'Delete'}>
               <FontAwesome
+                key={2}
                 onClick={() => {
                   deleteTodoReq.request({ id: item.id });
                 }}

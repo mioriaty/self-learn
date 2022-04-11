@@ -34,14 +34,15 @@ export interface KeyboardProps {
 
 export const Keyboard: FC<KeyboardProps> = ({ onClick, keyboardLetter }) => {
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-    const { textContent, innerHTML } = e.currentTarget;
-    let returnProps = textContent ?? '';
+    const { textContent } = e.currentTarget;
 
-    if (textContent !== innerHTML) {
-      returnProps = 'Backspace';
-    }
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    // const returnProps = textContent!;
+    // if (textContent !== innerHTML) {
+    //   returnProps = 'Backspace';
+    // }
 
-    onClick?.(returnProps);
+    onClick?.(textContent ?? '');
   };
 
   const renderKeyboards = () => {

@@ -36,15 +36,16 @@ export const wordleSlice = createSlice<WordleState, WordleActions>({
     handleAction('addGuessLetter', ({ state, action }) => {
       const { guess } = action.payload;
       const { answer, keyboardLetterState, rows } = state;
+
       const result = computeGuess(guess, answer);
 
       const didWin = result.every(letter => letter === LetterState.Match);
-
       const _rows = [...rows, { guess, result }];
 
       result.forEach((re, index) => {
         const resetGuessLetter = guess[index];
         const currentLetter = keyboardLetterState[resetGuessLetter];
+
         switch (currentLetter) {
           case LetterState.Match: {
             break;
@@ -59,12 +60,9 @@ export const wordleSlice = createSlice<WordleState, WordleActions>({
         }
       });
 
-      return {
-        ...state,
-        rows,
-        keyboardLetterState: keyboardLetterState,
-        gameState: didWin ? 'won' : _rows.length === GUESS_LENGTH ? 'lost' : 'playing',
-      };
+      state.rows = _rows;
+      state.keyboardLetterState = keyboardLetterState;
+      state.gameState = didWin ? 'won' : _rows.length === GUESS_LENGTH ? 'lost' : 'playing';
     }),
     handleAction('resetNewGame', ({ state }) => {
       return {

@@ -9,12 +9,12 @@ export interface DragItemProps {
   label: string;
   description?: string;
   active?: boolean;
-  Icon?: () => ReactNode;
   RightItem?: ReactNode;
-  onEdit?: () => void;
   css?: ViewProps['css'];
   innerCss?: ViewProps['css'];
   dragIconDisabled?: boolean;
+  Icon?: () => ReactNode;
+  onEdit?: () => void;
 }
 
 const DragItem: FC<DragItemProps> = ({

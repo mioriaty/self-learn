@@ -61,6 +61,8 @@ export const Wordle = () => {
 
       <Keyboard
         onClick={letter => {
+          console.log({ letter });
+
           addGuessLetter(letter);
         }}
         keyboardLetter={state.keyboardLetterState}
