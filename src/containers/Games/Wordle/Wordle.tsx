@@ -1,3 +1,4 @@
+import { Modal } from 'components/Modal';
 import { Keyboard, WordRow } from 'components/WordleComponents';
 import { usePrevious } from 'hooks/usePrevious';
 import { useSuggest } from 'hooks/useSuggest';
@@ -89,30 +90,34 @@ export const Wordle = () => {
         keyboardLetter={state.keyboardLetterState}
       />
 
-      {isGameOver && (
-        <div
-          role="modal"
-          className="absolute left-0 right-0 grid w-11/12 grid-rows-4 p-6 mx-auto text-center bg-black border border-gray-500 rounded-lg h-1/2 top-1/4"
-        >
-          {state.gameState === 'won' ? (
-            <span className="pt-12 text-6xl font-semibold text-white">You Won!</span>
-          ) : (
-            <span className="text-4xl font-semibold text-white">Game Over!</span>
-          )}
+      <Modal
+        size="medium"
+        cancelText=""
+        okText="New game"
+        onOk={() => {
+          newGame({});
+          setGuess('');
+        }}
+        onCancel={() => {
+          newGame({});
+          setGuess('');
+        }}
+        scrollDisabled
+        bodyCss={{ width: '500px' }}
+        isVisible={isGameOver}
+      >
+        {state.gameState === 'won' ? (
+          <Text color="secondary" className="text-6xl font-semibold text-center mb-4">
+            You Won!
+          </Text>
+        ) : (
+          <Text color="danger" className="text-4xl font-semibold">
+            Game Over!
+          </Text>
+        )}
 
-          {state.gameState === 'lost' && <WordRow letters={state.answer} className="items-center justify-items-center" />}
-
-          <button
-            className="absolute left-0 right-0 block p-2 mx-auto mt-4 font-bold text-white bg-green-500 border border-green-500 rounded top-56 hover:opacity-90 w-28"
-            onClick={() => {
-              newGame({});
-              setGuess('');
-            }}
-          >
-            NEW GAME
-          </button>
-        </div>
-      )}
+        {state.gameState === 'lost' && <WordRow letters={state.answer} className="items-center justify-items-center" />}
+      </Modal>
     </View>
   );
 };
