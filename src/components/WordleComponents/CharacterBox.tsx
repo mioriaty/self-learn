@@ -18,7 +18,7 @@ export const CharacterBox = ({ value, state }: CharacterBoxProps) => {
   return (
     <Text
       tagName="span"
-      className={`character-box text-2xl font-bold  text-center before:inline-block before:content-['_'] uppercase border border-gray-500 ${stateStyles}`}
+      className={`character-box text-2xl font-bold text-center before:inline-block before:content-['_'] uppercase border border-gray-300 ${stateStyles}`}
       color="primary"
       css={{ height: '50px', padding: '16px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
     >

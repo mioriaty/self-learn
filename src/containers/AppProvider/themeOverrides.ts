@@ -11,7 +11,7 @@ export const themeOverrides: ThemeOverrides = {
     primary: '#2C36DC',
     secondary: '#2AB885',
     tertiary: '#9540f7',
-    quaternary: '#ff6565',
+    quaternary: '#f3f169',
     light: '#ffffff',
     gray1: '#F8F8FC',
     gray2: '#f2f2f7',

@@ -4,7 +4,7 @@ import { useSuggest } from 'hooks/useSuggest';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { isValidWord, LETTER_LENGTH } from 'utils/wordHelper';
-import { View } from 'wiloke-react-core';
+import { Text, View } from 'wiloke-react-core';
 import { GUESS_LENGTH, useAddGuessLetter, useResetNewGame, wordleSelector } from '..';
 
 export const Wordle = () => {
@@ -53,16 +53,37 @@ export const Wordle = () => {
 
   return (
     <View>
+      <View css={{ textAlign: 'center' }}>
+        <Text tagName="h1" fontFamily="secondary" size={25} color="primary" css={{ textTransform: 'uppercase' }}>
+          The answer is
+        </Text>
+        <View borderColor="primary" borderStyle="dotted" borderWidth={2} className={`word-row-container grid grid-cols-5 gap-4 bg-green mb-4`}>
+          {state.answer.split('').map((char, index) => {
+            const hiddenChar = index === 1 || index === 2 || index === 3;
+            return (
+              <Text
+                key={index}
+                tagName="span"
+                className={`character-box text-2xl font-bold text-center before:inline-block before:content-['_'] uppercase border border-gray-300`}
+                color={hiddenChar ? 'transparent' : 'primary'}
+                backgroundColor={hiddenChar ? 'secondary' : 'quaternary'}
+                css={{ height: '50px', padding: '16px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
+              >
+                {hiddenChar ? '' : char}
+              </Text>
+            );
+          })}
+        </View>
+      </View>
       <View tagName="main" className="grid grid-rows-6 gap-4 mb-4">
-        {rows.map(({ guess, result }, index) => (
-          <WordRow key={index} letters={guess} result={result} className={showInvalidGuess && currentRow === index ? `animate-bounce` : ``} />
-        ))}
+        {rows.map(({ guess, result }, index) => {
+          const isWrong = showInvalidGuess && currentRow === index;
+          return <WordRow key={index} letters={guess} result={result} className={isWrong ? `border-double border-4 border-indigo-600` : ``} />;
+        })}
       </View>
 
       <Keyboard
         onClick={letter => {
-          console.log({ letter });
-
           addGuessLetter(letter);
         }}
         keyboardLetter={state.keyboardLetterState}

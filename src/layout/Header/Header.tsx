@@ -4,8 +4,11 @@ import { menuItems } from './data';
 
 export const Header = () => {
   return (
-    <View>
+    <View className="Header">
       <Navigation data={menuItems} />
+      {/* <View>
+        <Switch />
+      </View> */}
     </View>
   );
 };

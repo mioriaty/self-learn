@@ -14,9 +14,6 @@
     "source.fixAll.eslint": true,
     "source.fixAll": true
   },
-  "scss.scannerExclude": [
-    "**/.git"
-  ],
   "cSpell.words": [
     "todos"
   ]
