@@ -3,7 +3,7 @@ import { ComponentType, FC, useEffect, useRef, useState } from 'react';
 const withDebounce = <P extends any>(WrappedComponent: ComponentType<P>, propValue: keyof P, propOnChange: keyof P, time = 200) => {
   const WithDebounce: FC<P> = props => {
     const timeIdRef = useRef(-1);
-    const [mounted, setMouted] = useState(false);
+    const [mounted, setMounted] = useState(false);
     const [valueState, setValueState] = useState((props as any)[propValue]);
 
     useEffect(() => {
@@ -18,10 +18,10 @@ const withDebounce = <P extends any>(WrappedComponent: ComponentType<P>, propVal
           (props as any)[propOnChange]?.(valueState);
         }, time);
       }
-      setMouted(true);
+      setMounted(true);
       return () => {
         clearTimeout(timeIdRef.current);
-        setMouted(false);
+        setMounted(false);
       };
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [valueState]);

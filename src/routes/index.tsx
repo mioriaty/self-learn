@@ -1,8 +1,7 @@
 import { Home } from 'containers/Home';
 import { ProjectPage } from 'containers/ProjectPage';
 import { FC } from 'react';
-import { Switch } from 'react-router';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Page } from './types';
 
 export const pages: Page[] = [
@@ -15,7 +14,7 @@ const Routes: FC = () => {
     <BrowserRouter>
       <Switch>
         {pages.map(({ component, path, exact }) => {
-          return <Route key={path} exact={exact} path={path} component={component} />;
+          return <Route key={path} component={component} path={path} exact={exact} />;
         })}
         <Route>404</Route>
       </Switch>

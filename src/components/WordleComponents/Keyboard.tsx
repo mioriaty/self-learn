@@ -6,7 +6,7 @@ import { View } from 'wiloke-react-core';
 
 const keyboardKeys = [
   ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-  ['', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ''],
+  ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
   ['Enter', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Backspace'],
 ];
 
@@ -47,7 +47,7 @@ export const Keyboard: FC<KeyboardProps> = ({ onClick, keyboardLetter }) => {
 
   const renderKeyboards = () => {
     return keyboardKeys.map((keyboardRow, rowIndex) => (
-      <View key={rowIndex} className="flex justify-center my-2 mb-2 space-x-1 text-white">
+      <View key={rowIndex} className="flex justify-center space-x-1 text-white" css={{ margin: '2px 0' }}>
         {keyboardRow.map((key, index) => {
           let styles = 'rounded font-bold uppercase flex-1 py-2';
           const letterSpace = keyStateStyles[keyboardLetter[key]];
