@@ -30,5 +30,6 @@
   ],
   "include": [
     "src"
-  ]
+  ],
+  "files": ["src/react-app-env.d.ts"]
 }
