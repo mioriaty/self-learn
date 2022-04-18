@@ -29,7 +29,10 @@
     "**/*.js"
   ],
   "include": [
-    "src"
+    "src",
+    "src/react-app-env.d.ts"
   ],
-  "files": ["src/react-app-env.d.ts"]
+  "files": [
+    "src/react-app-env.d.ts"
+  ]
 }

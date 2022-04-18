@@ -10,9 +10,15 @@ module.exports = {
     plugins: {
       add: [
         new webpack.DefinePlugin({
-          process: {env: {}}
+          process: { env: {} }
         })
       ]
-    }
+    },
+    loaders: [
+      {
+        test: /\.mp3$/,
+        loader: 'file-loader',
+      },
+    ]
   }
 };

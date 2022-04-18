@@ -1,29 +1,30 @@
 import start_sound from 'assets/sounds/start.mp3';
-import rock_sound from 'assets/sound/rock.mp3';
-import paper_sound from 'assets/sound/slap.mp3';
-import scissors_sound from 'assets/sound/scissors.mp3';
-import confetti_sound from 'assets/sound/confetti.mp3';
-import lose_sound from 'assets/sound/lose.mp3';
 
-import femaleIdle from 'assets/img/female_idle.svg';
-import female_paper from 'assets/img/female_paper.svg';
-import female_rock from 'assets/img/female_rock.svg';
-import female_scissors from 'assets/img/female_scissors.svg';
-import male_paper from 'assets/img/male_paper.svg';
-import male_rock from 'assets/img/male_rock.svg';
-import male_scissors from 'assets/img/male_scissors.svg';
-import maleIdle from 'assets/img/male_idle.svg';
-import rock_icon from 'assets/img/rock_icon.svg';
-import paper_icon from 'assets/img/paper_icon.svg';
-import scissors_icon from 'assets/img/scissors_icon.svg';
-import random_icon from 'assets/img/random_icon.svg';
-import restart from 'assets/img/restart.svg';
-import result_cpu from 'assets/img/result_cpu.svg';
-import result_user from 'assets/img/result_user.svg';
-import user_hp_avatar from 'assets/img/user_hp_avatar.svg';
-import cpu_hp_avatar from 'assets/img/cpu_hp_avatar.svg';
+import femaleIdle from 'assets/images/female_idle.svg';
+import female_paper from 'assets/images/female_paper.svg';
+import female_rock from 'assets/images/female_rock.svg';
+import female_scissors from 'assets/images/female_scissors.svg';
+import male_paper from 'assets/images/male_paper.svg';
+import male_rock from 'assets/images/male_rock.svg';
+import male_scissors from 'assets/images/male_scissors.svg';
+import maleIdle from 'assets/images/male_idle.svg';
+import rock_icon from 'assets/images/rock_icon.svg';
+import paper_icon from 'assets/images/paper_icon.svg';
+import scissors_icon from 'assets/images/scissors_icon.svg';
+import random_icon from 'assets/images/random_icon.svg';
+import restart from 'assets/images/restart.svg';
+import result_cpu from 'assets/images/result_cpu.svg';
+import result_user from 'assets/images/result_user.svg';
+import user_hp_avatar from 'assets/images/user_hp_avatar.svg';
+import cpu_hp_avatar from 'assets/images/cpu_hp_avatar.svg';
 
-import { motion } from 'framer-motion';
+import lose_sound from 'assets/sounds/lose.mp3';
+import confetti_sound from 'assets/sounds/confetti.mp3';
+import scissors_sound from 'assets/sounds/scissors.mp3';
+import paper_sound from 'assets/sounds/slap.mp3';
+import rock_sound from 'assets/sounds/rock.mp3';
+
+import { motion } from 'framer-motion/dist/framer-motion';
 
 import { FC, useEffect, useState } from 'react';
 import { View } from 'wiloke-react-core';
@@ -165,7 +166,7 @@ export const RockPaperScissors: FC = () => {
   };
 
   return (
-    <View>
+    <View css={{ position: 'relative' }} className="hehe">
       {splash && (
         <div className="App">
           {!gameOver && (
