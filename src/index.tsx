@@ -4,6 +4,7 @@ import { render } from 'react-dom';
 import { getUseDispatchRedux } from 'wiloke-react-core/utils';
 import { useDispatch } from 'react-redux';
 import App from './App';
+import 'antd/dist/antd.css';
 
 import reportWebVitals from './reportWebVitals';
 getUseDispatchRedux(useDispatch);
