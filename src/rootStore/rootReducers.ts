@@ -1,4 +1,4 @@
-import { gameReducers } from 'containers/Games';
+import { gameReducers } from 'containers/GamesPage';
 import { reducerHome } from 'containers/Home';
 
 const reducers = {

@@ -1,3 +1,4 @@
+import { GamesPage } from 'containers/GamesPage';
 import { Home } from 'containers/Home';
 import { ProjectPage } from 'containers/ProjectPage';
 import { FC } from 'react';
@@ -7,6 +8,7 @@ import { Page } from './types';
 export const pages: Page[] = [
   { path: '/', component: Home, exact: true },
   { path: '/projects', component: ProjectPage, exact: true },
+  { path: '/games', component: GamesPage, exact: true },
 ];
 
 const Routes: FC = () => {

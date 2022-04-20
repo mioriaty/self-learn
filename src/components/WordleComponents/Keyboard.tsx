@@ -1,5 +1,5 @@
 import Button from 'components/Button';
-import { KeyboardLetterState } from 'containers/Games';
+import { KeyboardLetterState } from 'containers/GamesPage';
 import { FC, MouseEvent } from 'react';
 import { LetterState } from 'utils/wordHelper';
 import { View } from 'wiloke-react-core';

@@ -1,11 +1,10 @@
-import { treeData } from 'data/tree/treeData';
 import { Tree } from 'components/AntdCustom/Tree';
 import Box from 'components/FieldBox';
-import { Wordle } from 'containers/Games/Wordle';
+import { Wordle } from 'containers/GamesPage/Wordle';
+import { treeData } from 'data/tree/treeData';
 import { Template } from 'layout/Template';
 import { FC } from 'react';
 import { FontAwesome, View } from 'wiloke-react-core';
-import { RockPaperScissors } from 'containers/Games/RockPaperScissors';
 import { Todo } from './components/Todo';
 
 export const Home: FC = () => {
@@ -17,10 +16,6 @@ export const Home: FC = () => {
 
           <View width={700} css={{ padding: '10px' }}>
             <Wordle />
-          </View>
-
-          <View width={700} css={{ padding: '10px' }}>
-            <RockPaperScissors />
           </View>
 
           <Box css={{ padding: '20px' }} radius={4} borderColor="gray3" width={250}>
