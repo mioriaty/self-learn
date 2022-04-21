@@ -1,5 +1,6 @@
 import createSagaMiddleware from '@redux-saga/core';
 import { applyMiddleware, combineReducers, compose, createStore, Middleware } from 'redux';
+import logger from 'redux-logger';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
@@ -27,7 +28,7 @@ const reducers = persistReducer(persistConfig, _combineReducers);
 const middlewares: Middleware[] = [sagaMiddleware, thunk];
 
 if (isDev) {
-  // middlewares.push(logger);
+  middlewares.push(logger);
 }
 
 const store = createStore(reducers, undefined, composeEnhancers(applyMiddleware(...middlewares)));

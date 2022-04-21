@@ -11,17 +11,6 @@ export const container = css`
 export const top = css`
   debug: RPS-top;
   margin-left: 0;
-
-  @media screen and (max-width: 600px) {
-    margin-left: 0;
-  }
-  @media screen and (max-height: 700px) {
-    margin-left: 0;
-
-    img {
-      width: 45%;
-    }
-  }
 `;
 
 export const bottom = css`
@@ -29,12 +18,6 @@ export const bottom = css`
   position: absolute;
   bottom: -50px;
   right: 0;
-
-  @media screen and (max-height: 700px) {
-    img {
-      width: 90%;
-    }
-  }
 `;
 
 export const ui = css`
@@ -50,6 +33,10 @@ export const uiBox = css`
   debug: RPS-ui-box;
   position: relative;
   width: 320px;
+
+  img {
+    cursor: pointer;
+  }
 `;
 
 export const rock_icon = css`
@@ -58,11 +45,6 @@ export const rock_icon = css`
   bottom: 0px;
   left: 0;
   margin-bottom: 30px;
-
-  @media screen and (max-height: 700px) {
-    margin-bottom: 25px;
-    left: 50px;
-  }
 `;
 
 export const paper_icon = css`
@@ -79,10 +61,6 @@ export const scissors_icon = css`
   bottom: 0;
   right: 0;
   margin-bottom: 30px;
-  @media screen and (max-height: 700px) {
-    margin-bottom: 25px;
-    right: 40px;
-  }
 `;
 
 export const random_icon = css`
@@ -116,10 +94,6 @@ export const user_hp_avatar = css`
   debug: RPS-user-hp-avatar;
   position: absolute;
   top: 9vh;
-
-  @media screen and (max-height: 700px) {
-    top: 12vh;
-  }
 `;
 
 export const userHp = css`
@@ -161,10 +135,6 @@ export const cpu_hp_avatar = css`
   debug: RPS-spu-hp-avatar;
   position: absolute;
   bottom: 9vh;
-
-  @media screen and (max-height: 700px) {
-    bottom: 12vh;
-  }
 `;
 
 export const result = css`
@@ -222,10 +192,4 @@ export const button = css`
   height: 53px;
   margin-bottom: 10rem;
   box-shadow: 0px 6px 0px #ea9975;
-
-  @media screen and (max-height: 700px) {
-    margin-bottom: 5rem;
-    width: calc(196px - 10%);
-    height: calc(53px - 10px);
-  }
 `;
