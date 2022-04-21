@@ -1,33 +1,31 @@
-import start_sound from 'assets/sounds/start.mp3';
-
+import cpu_hp_avatar from 'assets/images/cpu_hp_avatar.svg';
 import femaleIdle from 'assets/images/female_idle.svg';
 import female_paper from 'assets/images/female_paper.svg';
 import female_rock from 'assets/images/female_rock.svg';
 import female_scissors from 'assets/images/female_scissors.svg';
+import maleIdle from 'assets/images/male_idle.svg';
 import male_paper from 'assets/images/male_paper.svg';
 import male_rock from 'assets/images/male_rock.svg';
 import male_scissors from 'assets/images/male_scissors.svg';
-import maleIdle from 'assets/images/male_idle.svg';
-import rock_icon from 'assets/images/rock_icon.svg';
 import paper_icon from 'assets/images/paper_icon.svg';
-import scissors_icon from 'assets/images/scissors_icon.svg';
 import random_icon from 'assets/images/random_icon.svg';
 import restart from 'assets/images/restart.svg';
 import result_cpu from 'assets/images/result_cpu.svg';
 import result_user from 'assets/images/result_user.svg';
+import rock_icon from 'assets/images/rock_icon.svg';
+import scissors_icon from 'assets/images/scissors_icon.svg';
 import user_hp_avatar from 'assets/images/user_hp_avatar.svg';
-import cpu_hp_avatar from 'assets/images/cpu_hp_avatar.svg';
 
-import lose_sound from 'assets/sounds/lose.mp3';
 import confetti_sound from 'assets/sounds/confetti.mp3';
+import lose_sound from 'assets/sounds/lose.mp3';
+import rock_sound from 'assets/sounds/rock.mp3';
 import scissors_sound from 'assets/sounds/scissors.mp3';
 import paper_sound from 'assets/sounds/slap.mp3';
-import rock_sound from 'assets/sounds/rock.mp3';
-
+import start_sound from 'assets/sounds/start.mp3';
 import { motion } from 'framer-motion/dist/framer-motion';
-
 import { FC, useEffect, useState } from 'react';
-import { View } from 'wiloke-react-core';
+import { useStyleSheet, View } from 'wiloke-react-core';
+import * as _styles from './styles';
 
 type Choice = 'rock' | 'paper' | 'scissors';
 
@@ -51,6 +49,8 @@ export const RockPaperScissors: FC = () => {
   const [splash, setSplash] = useState(false);
 
   const randomChoice = choices[Math.floor(Math.random() * choices.length)];
+
+  const { styles } = useStyleSheet();
 
   useEffect(() => {
     const comboMoves = userChoice + computerChoice;
@@ -166,13 +166,13 @@ export const RockPaperScissors: FC = () => {
   };
 
   return (
-    <View css={{ position: 'relative' }} className="hehe">
+    <View css={_styles.container} borderColor="primary" borderStyle="solid" borderWidth={2}>
       {splash && (
-        <div className="App">
+        <>
           {!gameOver && (
             <>
-              <div className="game">
-                <div className="top">
+              <View>
+                <View className={styles(_styles.top)}>
                   <motion.img
                     key={computerChoice}
                     src={femaleImg}
@@ -184,8 +184,8 @@ export const RockPaperScissors: FC = () => {
                     initial={{ y: -200 }}
                     animate={{ y: -50 }}
                   />{' '}
-                </div>
-                <div className="bottom">
+                </View>
+                <View className={styles(_styles.bottom)}>
                   <motion.img
                     src={maleImg}
                     key={userChoice}
@@ -194,24 +194,25 @@ export const RockPaperScissors: FC = () => {
                     initial={{ y: 200 }}
                     animate={{ y: 50 }}
                   />
-                </div>
-                <div className="ui">
-                  <div className="ui-box">
-                    <img src={rock_icon} alt="" className="rock_icon" onClick={() => handleClick(choices[0])} />
-                    <img src={paper_icon} alt="" className="paper_icon" onClick={() => handleClick(choices[1])} />
-                    <img src={scissors_icon} alt="" className="scissors_icon" onClick={() => handleClick(choices[2])} />
-                    <img src={random_icon} alt="" className="random_icon" onClick={() => randomClick()} />
-                  </div>
-                </div>
-              </div>
-              <div className="score">
+                </View>
+                <View className={styles(_styles.ui)}>
+                  <View className={styles(_styles.uiBox)}>
+                    <img src={rock_icon} className={styles(_styles.rock_icon)} onClick={() => handleClick(choices[0])} />
+                    <img src={paper_icon} className={styles(_styles.paper_icon)} onClick={() => handleClick(choices[1])} />
+                    <img src={scissors_icon} className={styles(_styles.scissors_icon)} onClick={() => handleClick(choices[2])} />
+                    <img src={random_icon} className={styles(_styles.random_icon)} onClick={() => randomClick()} />
+                  </View>
+                </View>
+              </View>
+
+              <View className={styles(_styles.score)}>
                 {gameOver && <p>{result}</p>}
-                <div className="hp-box-user">
-                  <div className="hp-box-inner-user">
-                    <progress className="user-hp" value={5 - computerPoints} max="5"></progress>
+                <View className={styles(_styles.hpBoxUser)}>
+                  <View className={styles(_styles.hpBoxInnerUser)}>
+                    <View tagName="progress" className={styles(_styles.userHp)} value={5 - computerPoints} max="5" />
                     <motion.img
                       src={user_hp_avatar}
-                      className="user_hp_avatar"
+                      className={styles(_styles.user_hp_avatar)}
                       alt=""
                       key={computerPoints}
                       animate={{
@@ -219,14 +220,14 @@ export const RockPaperScissors: FC = () => {
                       }}
                       transition={{ duration: 0.5 }}
                     />
-                  </div>
-                </div>
-                <div className="hp-box-cpu">
-                  <div className="hp-box-inner-user">
-                    <progress className="user-hp cpu" value={5 - userPoints} max="5"></progress>
+                  </View>
+                </View>
+                <View className={styles(_styles.hpBoxCpu)}>
+                  <View className={styles(_styles.hpBoxInnerUser)}>
+                    <View tagName="progress" className={styles(_styles.userHp, _styles.cpu)} value={5 - userPoints} max="5" />
                     <motion.img
                       src={cpu_hp_avatar}
-                      className="cpu_hp_avatar"
+                      className={styles(_styles.cpu_hp_avatar)}
                       alt=""
                       key={userPoints}
                       animate={{
@@ -234,14 +235,14 @@ export const RockPaperScissors: FC = () => {
                       }}
                       transition={{ duration: 0.5 }}
                     />
-                  </div>
-                </div>
-              </div>
+                  </View>
+                </View>
+              </View>
             </>
           )}
           {gameOver && (
             <motion.div
-              className="result"
+              className={styles(_styles.result)}
               animate={{ scale: 1.3 }}
               transition={{
                 duration: 0.5,
@@ -257,10 +258,12 @@ export const RockPaperScissors: FC = () => {
                 }}
                 transition={{ duration: 1 }}
               />
-              <p className="result-msg">{result}</p>
-              <p className="result-score">
+              <View tagName="p" className={styles(_styles.resultMsg)}>
+                {result}
+              </View>
+              <View tagName="p" className={styles(_styles.resultScore)}>
                 {computerPoints} - {userPoints}
-              </p>
+              </View>
               <motion.img
                 src={restart}
                 alt=""
@@ -270,11 +273,12 @@ export const RockPaperScissors: FC = () => {
               />
             </motion.div>
           )}
-        </div>
+        </>
       )}
       {!splash && (
-        <motion.div className="splash" initial={{ y: 1000 }} transition={{ duration: 1 }} animate={{ y: 0 }}>
+        <motion.div className={styles(_styles.splash)} initial={{ y: 1000 }} transition={{ duration: 1 }} animate={{ y: 0 }}>
           <motion.button
+            className={styles(_styles.button)}
             onClick={() => {
               setSplash(true);
               start_sfx.play();
@@ -284,7 +288,7 @@ export const RockPaperScissors: FC = () => {
             }}
             transition={{ repeat: Infinity, duration: 1.2, delay: 1 }}
           >
-            Start
+            Chơi đê
           </motion.button>
         </motion.div>
       )}

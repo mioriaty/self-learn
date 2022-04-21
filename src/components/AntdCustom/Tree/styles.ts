@@ -16,12 +16,18 @@ export const container = (keepAntdCss: boolean) => ({ colors }: Theme) => {
       }
 
       .ant-tree.ant-tree-directory .ant-tree-treenode .ant-tree-node-content-wrapper.ant-tree-node-selected {
+        background-color: ${colors.gray4};
         color: ${colors.gray8};
-        font-weight: 500;
       }
+
       .ant-tree.ant-tree-directory .ant-tree-treenode-selected .ant-tree-switcher {
         color: ${colors.gray8};
         font-weight: 500;
+      }
+
+      .ant-tree-node-content-wrapper {
+        will-change: color;
+        transition: none;
       }
     }
   `;

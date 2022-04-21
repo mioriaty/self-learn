@@ -1,16 +1,44 @@
+import splashBg from 'assets/images/splash_bg.svg';
 import { css } from 'wiloke-react-core';
 
+export const container = css`
+  debug: RPS-container;
+  position: relative;
+  overflow: hidden;
+  min-height: 700px;
+`;
+
 export const top = css`
-  margin-left: 3rem;
+  debug: RPS-top;
+  margin-left: 0;
+
+  @media screen and (max-width: 600px) {
+    margin-left: 0;
+  }
+  @media screen and (max-height: 700px) {
+    margin-left: 0;
+
+    img {
+      width: 45%;
+    }
+  }
 `;
 
 export const bottom = css`
+  debug: RPS-bottom;
   position: absolute;
   bottom: -50px;
-  right: 3rem;
+  right: 0;
+
+  @media screen and (max-height: 700px) {
+    img {
+      width: 90%;
+    }
+  }
 `;
 
 export const ui = css`
+  debug: RPS-ui;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -19,18 +47,26 @@ export const ui = css`
 `;
 
 export const uiBox = css`
+  debug: RPS-ui-box;
   position: relative;
   width: 320px;
 `;
 
 export const rock_icon = css`
+  debug: RPS-rock-icon;
   position: absolute;
   bottom: 0px;
   left: 0;
   margin-bottom: 30px;
+
+  @media screen and (max-height: 700px) {
+    margin-bottom: 25px;
+    left: 50px;
+  }
 `;
 
 export const paper_icon = css`
+  debug: RPS-paper-icon;
   position: absolute;
   bottom: 0;
   left: 40%;
@@ -38,27 +74,38 @@ export const paper_icon = css`
 `;
 
 export const scissors_icon = css`
+  debug: RPS-scissors-icon;
   position: absolute;
   bottom: 0;
   right: 0;
   margin-bottom: 30px;
+  @media screen and (max-height: 700px) {
+    margin-bottom: 25px;
+    right: 40px;
+  }
 `;
+
 export const random_icon = css`
+  debug: RPS-random-icon;
   position: absolute;
   bottom: -65px;
   left: 37%;
 `;
 
 export const score = css`
+  debug: RPS-score;
   width: 100%;
 `;
+
 export const hpBoxUser = css`
+  debug: RPS-hp-box-user;
   position: absolute;
-  left: 30px;
+  left: 120px;
   bottom: 35%;
 `;
 
 export const hpBoxInnerUser = css`
+  debug: RPS-hp-box-inner-user;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -66,74 +113,91 @@ export const hpBoxInnerUser = css`
 `;
 
 export const user_hp_avatar = css`
+  debug: RPS-user-hp-avatar;
   position: absolute;
   top: 9vh;
+
+  @media screen and (max-height: 700px) {
+    top: 12vh;
+  }
 `;
+
 export const userHp = css`
+  debug: RPS-user-hp;
   -webkit-appearance: none;
   appearance: none;
   height: 10px;
   transform: rotate(-90deg);
+
+  &::-webkit-progress-bar {
+    background-color: #232586;
+    border-radius: 7px;
+  }
+
+  &::-webkit-progress-value {
+    background-color: #ffb24c;
+    border-radius: 7px;
+  }
 `;
+
 export const cpu = css`
+  debug: RPS-cpu;
   transform: rotate(90deg);
+
+  &::-webkit-progress-value {
+    background-color: #90c67b;
+    border-radius: 7px;
+  }
 `;
+
 export const hpBoxCpu = css`
+  debug: RPS-hp-box-cpu;
   position: absolute !important;
-  right: 30px;
+  right: 120px;
   top: 20%;
 `;
+
 export const cpu_hp_avatar = css`
+  debug: RPS-spu-hp-avatar;
   position: absolute;
   bottom: 9vh;
-`;
-//   .user-hp::-webkit-progress-bar {
-//     background-color: #232586;
-//     border-radius: 7px;
-//   }
 
-//   .user-hp::-webkit-progress-value {
-//     background-color: #ffb24c;
-//     border-radius: 7px;
-//   }
-//   .cpu::-webkit-progress-value {
-//     background-color: #90c67b;
-//     border-radius: 7px;
-//   }
-//   .user-hp::-moz-progress-bar {
-//     background-color: #232586;
-//     border-radius: 7px;
-//   }
-//   .user-hp::-moz-progress-value {
-//     background-color: #ffb24c;
-//     border-radius: 7px;
-//   }
+  @media screen and (max-height: 700px) {
+    bottom: 12vh;
+  }
+`;
 
 export const result = css`
+  debug: RPS-result;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  height: 800px;
 `;
+
 export const resultMsg = css`
+  debug: RPS-result-msg;
   font-weight: 700;
   font-size: 21px;
   color: #ffb24c;
   line-height: 25px;
   margin-top: 2rem;
 `;
+
 export const resultScore = css`
+  debug: RPS-result-score;
   font-weight: 500;
   font-size: 41px;
-  color: #ffffff;
+  color: #ffb24c;
   line-height: 49px;
   margin-bottom: 2rem;
 `;
 
 export const splash = css`
-  background-image: url('./assets/img/splash_bg.svg');
-  height: 100vh;
+  debug: RPS-splash;
+  background-image: url(${splashBg});
+  height: 700px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -144,6 +208,7 @@ export const splash = css`
 `;
 
 export const button = css`
+  debug: RPS-button;
   border: none;
   outline: none;
   background: #f1aa83;
@@ -158,58 +223,9 @@ export const button = css`
   margin-bottom: 10rem;
   box-shadow: 0px 6px 0px #ea9975;
 
-  &:hover {
-    box-shadow: initial;
+  @media screen and (max-height: 700px) {
+    margin-bottom: 5rem;
+    width: calc(196px - 10%);
+    height: calc(53px - 10px);
   }
 `;
-
-//   @media screen and (max-width: 600px) {
-//     .splash {
-//       background-size: cover;
-//     }
-//     .top {
-//       margin-left: 3rem;
-//     }
-
-//     .hp-box-cpu {
-//       right: -30px;
-//     }
-
-//     .hp-box-user {
-//       left: -30px;
-//     }
-//   }
-
-//   @media screen and (max-height: 700px) {
-//     .top {
-//       margin-left: 3rem;
-//     }
-
-//     .splash button {
-//       margin-bottom: 5rem;
-//       width: calc(196px - 10%);
-//       height: calc(53px - 10px);
-//     }
-//     .rock_icon,
-//     .scissors_icon {
-//       margin-bottom: 25px;
-//     }
-//     .bottom img {
-//       width: 90%;
-//     }
-//     .top img {
-//       width: 45%;
-//     }
-//     .user_hp_avatar {
-//       top: 12vh;
-//     }
-//     .cpu_hp_avatar {
-//       bottom: 12vh;
-//     }
-//     .rock_icon {
-//       left: 50px;
-//     }
-//     .scissors_icon {
-//       right: 40px;
-//     }
-//   }

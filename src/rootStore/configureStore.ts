@@ -1,11 +1,10 @@
-import { Middleware, createStore, applyMiddleware, combineReducers, compose } from 'redux';
-import { createLogger } from 'redux-logger';
-import thunk from 'redux-thunk';
 import createSagaMiddleware from '@redux-saga/core';
+import { applyMiddleware, combineReducers, compose, createStore, Middleware } from 'redux';
+import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { persistStore, persistReducer } from 'redux-persist';
-import rootSaga from 'rootStore/rootSagas';
+import thunk from 'redux-thunk';
 import rootReducers from 'rootStore/rootReducers';
+import rootSaga from 'rootStore/rootSagas';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -26,13 +25,9 @@ const _combineReducers = combineReducers({
 const sagaMiddleware = createSagaMiddleware();
 const reducers = persistReducer(persistConfig, _combineReducers);
 const middlewares: Middleware[] = [sagaMiddleware, thunk];
-const logger = createLogger({
-  titleFormatter: (action: any, time: string, took: number) => {
-    return `${window.location.href} - action ${action.type} | ${time} | in ${took.toFixed(2)} ms`;
-  },
-});
+
 if (isDev) {
-  middlewares.push(logger);
+  // middlewares.push(logger);
 }
 
 const store = createStore(reducers, undefined, composeEnhancers(applyMiddleware(...middlewares)));

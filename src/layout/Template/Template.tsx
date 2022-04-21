@@ -4,6 +4,7 @@ import { View } from 'wiloke-react-core';
 
 export interface TemplateProps {
   Content: ReactNode;
+
   CustomHeader?: ReactNode;
 }
 
