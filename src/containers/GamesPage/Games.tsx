@@ -12,11 +12,11 @@ export const GamesPage: FC = () => {
     <Template
       Content={
         <View>
-          <View container css={{ height: '100vh' }}>
+          <View container>
             <RockPaperScissors />
           </View>
 
-          <View container css={{ height: '100vh' }}>
+          <View container>
             <Wordle />
           </View>
 
