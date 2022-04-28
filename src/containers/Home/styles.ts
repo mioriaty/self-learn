@@ -15,6 +15,11 @@ export const dark = ({ colors }: Theme) => css`
   height: 100%;
   width: 50%;
   background-color: ${colors.dark};
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 50%;
+  }
 `;
 
 export const light = ({ colors }: Theme) => css`
@@ -24,9 +29,17 @@ export const light = ({ colors }: Theme) => css`
   height: 100%;
   width: 50%;
   background-color: ${colors.light};
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 50%;
+    bottom: 0;
+    top: unset;
+  }
 `;
 
 export const intro = ({ colors }: Theme) => css`
+  debug: intro-container;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -38,21 +51,17 @@ export const intro = ({ colors }: Theme) => css`
   background-repeat: no-repeat;
   border-left: 2px solid rgb(${colors.rgbLight});
   border-right: 2px solid rgb(${colors.rgbDark});
-
-  background-image: linear-gradient(to right, rgb(${colors.rgbLight}) 50%, rgb(${colors.rgbDark}) 50%),
-    linear-gradient(to right, rgb(${colors.rgbLight}) 50%, rgb(${colors.rgbDark}) 50%);
-  background-position-x: center, center;
-  background-position-y: bottom, top;
   background-size: 100% 2px;
-  background-repeat-x: no-repeat;
-  background-repeat-y: no-repeat;
-  background-attachment: initial, initial;
-  background-origin: initial, initial;
-  background-clip: initial, initial;
-  background-color: initial;
-  background-repeat: no-repeat;
 
   display: flex;
+
+  @media (max-width: 768px) {
+    border-top: 2px solid rgb(${colors.rgbLight});
+    border-bottom: 2px solid rgb(${colors.rgbDark});
+
+    border-left: unset;
+    border-right: unset;
+  }
 `;
 
 export const introLeft = css`
