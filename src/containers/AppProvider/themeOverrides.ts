@@ -43,7 +43,7 @@ export const themeOverrides: ThemeOverrides = {
   },
   grid: {
     container: {
-      width: 1200,
+      width: 1300,
       gap: 15,
     },
     columns: {
@@ -54,7 +54,7 @@ export const themeOverrides: ThemeOverrides = {
       xs: 'default',
       sm: 768,
       md: 992,
-      lg: 1200,
+      lg: 1300,
     },
   },
 };
