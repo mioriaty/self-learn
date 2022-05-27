@@ -59,3 +59,5 @@ export const useLogout = createDispatchAction(logout);
 export const useUpdateSession = createDispatchAction(updateSession);
 export const useUpdateUserProfile = createDispatchAction(updateUserProfile);
 export const useUpdateUserState = createDispatchAction(updateUserState);
+
+export const userSelector = (state: AppState) => state.chat.user;

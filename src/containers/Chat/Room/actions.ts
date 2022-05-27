@@ -24,7 +24,10 @@ export interface UpdateRoomMessage {
 
 export interface UpdateViewMessage {
   type: 'updateViewMessage';
-  payload: Message;
+  payload: {
+    room_index: number;
+    message: Message[];
+  };
 }
 
 // room

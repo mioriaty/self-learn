@@ -2,7 +2,6 @@ import Button, { ButtonProps } from 'components/Button';
 import ScrollBars from 'components/ScrollBars';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useKey } from 'react-use';
 import { View, ViewProps } from 'wiloke-react-core';
 import { ModalHeader } from './ModalHeader';
 import * as styles from './styles';
@@ -45,7 +44,6 @@ const Modal = <T extends any = any>({
 }: MyModalProps<T>) => {
   const [height, setHeight] = useState<string>('auto');
   const childRef = useRef<HTMLElement | null>(null);
-  useKey('Escape', onCancel);
 
   const setHeightState = () => {
     const maxHeight = window.innerHeight - 60;
