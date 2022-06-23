@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Animation</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <div class="animation-container">
+    <p>
+      <strong>Power of n (lũy thừa của n)</strong>
+    </p>
+    <p>
+      If we want to speed up the animation, we can use progress in the power
+      n. <br />
+      Exp, a parabolic curve:
+    </p>
+    <div class="path">
+      <div class="brick powerOfN"></div>
+    </div>
+    <img src="https://javascript.info/article/js-animation/quad.svg" alt="">
+  </div>
+
+  <div class="animation-container">
+    <p>
+      <strong>The Arc (Vòng cung)</strong>
+    </p>
+    <div class="path">
+      <div class="brick theArc"></div>
+    </div>
+    <img src="https://javascript.info/article/js-animation/circ.svg" alt="">
+  </div>
+
+  <div class="animation-container">
+    <p>
+      <strong>Back: bow shooting</strong>
+    </p>
+    <p>
+      This function does the “bow shooting”. First we “pull the bowstring”,
+      and then “shoot”. <br />
+      Unlike previous functions, it depends on an additional parameter x, the
+      “elasticity coefficient”. <br />
+      The distance of “bowstring pulling” is defined by it.
+    </p>
+    <div class="path">
+      <div class="brick bowShooting"></div>
+    </div>
+    <img src="https://javascript.info/article/js-animation/back.svg" alt="">
+  </div>
+
+  <div class="animation-container">
+    <p>
+      <strong>Bounce</strong>
+    </p>
+    <p>
+      Imagine we are dropping a ball. It falls down, then bounces back a few
+      times and stops. <br />
+      The bounce function does the same, but in the reverse order: “bouncing”
+      starts immediately. <br />
+      It uses few special coefficients for that:
+    </p>
+    <div class="path">
+      <div class="brick bounce"></div>
+    </div>
+  </div>
+
+  <div class="animation-container">
+    <p>
+      <strong>Elastic animation(animation co giãn)</strong>
+    </p>
+    <p>
+      One more “elastic” function that accepts an additional parameter x for
+      the “initial range”.
+    </p>
+    <div class="path">
+      <div class="brick elastic"></div>
+    </div>
+    <img src="https://javascript.info/article/js-animation/elastic.svg" alt="">
+
+  </div>
+
+  <div class="animation-container">
+    <p>
+      <strong>Ease Out</strong>
+    </p>
+    <div class="path">
+      <div class="brick easeOut"></div>
+    </div>
+    <img src="https://javascript.info/article/js-animation/bounce-inout.svg" alt="">
+  </div>
+
+  <div class="animation-container">
+    <p>
+      <strong>Ease In Out</strong>
+    </p>
+    <p>
+      The “easeInOut” transform joins two graphs into one: easeIn (regular)
+      for the first half of the animation and easeOut (reversed) – for the
+      second part. <br />
+      The effect is clearly seen if we compare the graphs of easeIn, easeOut
+      and easeInOut of the circ timing function:
+    </p>
+    <div class="path">
+      <div class="brick easeInOut"></div>
+    </div>
+    <img src="https://javascript.info/article/js-animation/circ-ease.svg" alt="">
+  </div>
+
+  <br />
+  <hr />
+  <hr />
+  <hr />
+  <br />
+
+  <h2>Demo: Bấm vào quả pónk</h2>
+
+  <div id="field">
+    <img src="https://js.cx/clipart/ball.svg" width="40" height="40" id="ball" />
+  </div>
+  <br />
+
+  <script src="./index.ts"></script>
+</body>
+
+</html>
