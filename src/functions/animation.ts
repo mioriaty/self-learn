@@ -20,8 +20,7 @@ export function back(x: number, timeFraction: TimeFraction) {
 export function bounce(timeFraction: TimeFraction) {
   for (let a = 0, b = 1; 1; a += b, b /= 2) {
     if (timeFraction >= (7 - 4 * a) / 11) {
-      const result =
-        -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2);
+      const result = -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2);
 
       return result;
     }
@@ -29,10 +28,7 @@ export function bounce(timeFraction: TimeFraction) {
 }
 
 export function elastic(x: number, timeFraction: TimeFraction) {
-  return (
-    Math.pow(2, 10 * (timeFraction - 1)) *
-    Math.cos(((20 * Math.PI * x) / 3) * timeFraction)
-  );
+  return Math.pow(2, 10 * (timeFraction - 1)) * Math.cos(((20 * Math.PI * x) / 3) * timeFraction);
 }
 /**
  * Accepts a timing function, returns the transformed variant
@@ -51,19 +47,11 @@ export function makeEaseInOut(timing: TimingFnc) {
   };
 }
 /**
- * @param timing the function to calculate animation progress. Gets a time fraction from 0 to 1, returns the animation progress, usually from 0 to 1.
+ * @param timing Là function tính toán tiến trình của animation. Nhận phân số thời gian(timeFraction) từ 0 đến 1, return tiến trình animation, thường là từ 0 đến 1.
  * @param duration the total animation time in ms.
  * @param draw the function to draw the animation.
  */
-export function animate({
-  timing,
-  draw,
-  duration
-}: {
-  duration: number;
-  draw: (time: number) => void;
-  timing: TimingFnc;
-}) {
+export function animate({ timing, draw, duration }: { duration: number; draw: (time: number) => void; timing: TimingFnc }) {
   const start = performance.now();
 
   requestAnimationFrame(function animate(time) {

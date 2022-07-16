@@ -185,7 +185,7 @@ function makeEaseInOut(timing) {
 
 exports.makeEaseInOut = makeEaseInOut;
 /**
- * @param timing the function to calculate animation progress. Gets a time fraction from 0 to 1, returns the animation progress, usually from 0 to 1.
+ * @param timing Là function tính toán tiến trình của animation. Nhận phân số thời gian(timeFraction) từ 0 đến 1, return tiến trình animation, thường là từ 0 đến 1.
  * @param duration the total animation time in ms.
  * @param draw the function to draw the animation.
  */
@@ -223,69 +223,69 @@ var animation_1 = require("./functions/animation");
 function hasClass(_a) {
   var element = _a.element,
       className = _a.className;
-  return (" " + element.className + " ").indexOf(" " + className + " ") > -1;
+  return (' ' + element.className + ' ').indexOf(' ' + className + ' ') > -1;
 }
 
-var bricks = Array.from(document.querySelectorAll(".brick"));
+var bricks = Array.from(document.querySelectorAll('.brick'));
 bricks.forEach(function (brick) {
   var _brick = brick;
 
   if (hasClass({
-    className: "powerOfN",
+    className: 'powerOfN',
     element: _brick
   })) {
-    _brick.addEventListener("click", function () {
+    _brick.addEventListener('click', function () {
       (0, animation_1.animate)({
         duration: 1000,
         timing: function timing(timeFraction) {
           return (0, animation_1.quad)(timeFraction);
         },
         draw: function draw(progress) {
-          _brick.style.left = progress * 500 + "px";
+          _brick.style.left = progress * 500 + 'px';
         }
       });
     });
   }
 
   if (hasClass({
-    className: "theArc",
+    className: 'theArc',
     element: _brick
   })) {
-    _brick.addEventListener("click", function () {
+    _brick.addEventListener('click', function () {
       (0, animation_1.animate)({
         duration: 1000,
         timing: function timing(timeFraction) {
           return (0, animation_1.circ)(timeFraction);
         },
         draw: function draw(progress) {
-          _brick.style.left = progress * 500 + "px";
+          _brick.style.left = progress * 500 + 'px';
         }
       });
     });
   }
 
   if (hasClass({
-    className: "bowShooting",
+    className: 'bowShooting',
     element: _brick
   })) {
-    _brick.addEventListener("click", function () {
+    _brick.addEventListener('click', function () {
       (0, animation_1.animate)({
         duration: 1000,
         timing: function timing(timeFraction) {
           return (0, animation_1.back)(1.5, timeFraction);
         },
         draw: function draw(progress) {
-          _brick.style.left = progress * 500 + "px";
+          _brick.style.left = progress * 500 + 'px';
         }
       });
     });
   }
 
   if (hasClass({
-    className: "bounce",
+    className: 'bounce',
     element: _brick
   })) {
-    _brick.addEventListener("click", function () {
+    _brick.addEventListener('click', function () {
       (0, animation_1.animate)({
         duration: 1000,
         timing: function timing(timeFraction) {
@@ -294,31 +294,31 @@ bricks.forEach(function (brick) {
           return (_a = (0, animation_1.bounce)(timeFraction)) !== null && _a !== void 0 ? _a : 0;
         },
         draw: function draw(progress) {
-          _brick.style.left = progress * 500 + "px";
+          _brick.style.left = progress * 500 + 'px';
         }
       });
     });
   }
 
   if (hasClass({
-    className: "elastic",
+    className: 'elastic',
     element: _brick
   })) {
-    _brick.addEventListener("click", function () {
+    _brick.addEventListener('click', function () {
       (0, animation_1.animate)({
         duration: 3000,
         timing: function timing(timeFraction) {
           return (0, animation_1.elastic)(1.5, timeFraction);
         },
         draw: function draw(progress) {
-          _brick.style.left = progress * 500 + "px";
+          _brick.style.left = progress * 500 + 'px';
         }
       });
     });
   }
 
   if (hasClass({
-    className: "easeOut",
+    className: 'easeOut',
     element: _brick
   })) {
     var bounceEaseOut_1 = (0, animation_1.makeEaseOut)(function (time) {
@@ -327,19 +327,19 @@ bricks.forEach(function (brick) {
       return (_a = (0, animation_1.bounce)(time)) !== null && _a !== void 0 ? _a : 0;
     });
 
-    _brick.addEventListener("click", function () {
+    _brick.addEventListener('click', function () {
       (0, animation_1.animate)({
         duration: 1000,
         timing: bounceEaseOut_1,
         draw: function draw(progress) {
-          _brick.style.left = progress * 500 + "px";
+          _brick.style.left = progress * 500 + 'px';
         }
       });
     });
   }
 
   if (hasClass({
-    className: "easeInOut",
+    className: 'easeInOut',
     element: _brick
   })) {
     var bounceEaseOut_2 = (0, animation_1.makeEaseInOut)(function (time) {
@@ -348,20 +348,20 @@ bricks.forEach(function (brick) {
       return (_a = (0, animation_1.bounce)(time)) !== null && _a !== void 0 ? _a : 0;
     });
 
-    _brick.addEventListener("click", function () {
+    _brick.addEventListener('click', function () {
       (0, animation_1.animate)({
         duration: 3000,
         timing: bounceEaseOut_2,
         draw: function draw(progress) {
-          _brick.style.left = progress * 500 + "px";
+          _brick.style.left = progress * 500 + 'px';
         }
       });
     });
   }
 });
-var ball = document.getElementById("ball");
-var field = document.getElementById("field");
-ball.addEventListener("click", function () {
+var ball = document.getElementById('ball');
+var field = document.getElementById('field');
+ball.addEventListener('click', function () {
   var height = field.clientHeight - ball.clientHeight;
   var width = 100;
   var bounceEaseOut = (0, animation_1.makeEaseOut)(function (time) {
@@ -374,17 +374,23 @@ ball.addEventListener("click", function () {
     duration: 2000,
     timing: bounceEaseOut,
     draw: function draw(progress) {
-      ball.style.top = height * progress + "px";
+      ball.style.top = height * progress + 'px';
     }
   }); // animate left (moving to the right)
 
   (0, animation_1.animate)({
     duration: 2000,
-    timing: (0, animation_1.makeEaseOut)(animation_1.quad),
     draw: function draw(progress) {
-      ball.style.left = width * progress + "px";
-    }
-  });
+      ball.style.left = width * progress + 'px';
+    },
+    timing: (0, animation_1.makeEaseOut)(animation_1.quad)
+  }); // animate({
+  //   duration: 2000,
+  //   timing:linear,
+  //   draw: function (progress) {
+  //     ball.style.left = 500 * progress + "px";
+  //   }
+  // });
 });
 },{"./functions/animation":"functions/animation.ts"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -414,7 +420,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53156" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53904" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
